@@ -10,13 +10,13 @@ using System.IO;
 /*
  * Author: John Marnon
  * CreationDate: 7/14/14
- * LastEditDate: 7/14/14
+ * LastEditDate: 11/17/15
  * Notes:
  * This class is design for saving data stored in common classes for easy reloading
  * It was copied to the IGVC project on 1/27/15
  */
 
-namespace IGVC_Controller.DataIO
+namespace IGVC_2016.DataIO
 {
     public class SaveFile
     {

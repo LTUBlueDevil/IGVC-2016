@@ -7,21 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using IGVC_2016.Code.Lidar;
 
-namespace IGVC_2016
+
+namespace IGVC_2016.Code.Lidar
 {
-    public partial class MainWindow : Form
+    public partial class LidarVisulizer : Form
     {
-        public MainWindow()
+        public LidarVisulizer()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            LidarVisulizer frm = new LidarVisulizer();
-            frm.Show();
         }
     }
 }
