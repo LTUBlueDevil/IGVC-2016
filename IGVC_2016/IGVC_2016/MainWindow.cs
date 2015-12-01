@@ -11,41 +11,37 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-/*This is the main form
- * Created for the 2016 IGVC Robotics team
+/*Created By: Vincent Nicolazzo
+ * Created On: 12/1/2015
+ * Last Edited: 12/1/2015
  * 
- * Last edited: 11/24/15
-*/
+ * This class handles all the inputs and oupts for the robot
+ */
 
 namespace IGVC_2016
 {
     public partial class MainWindow : Form
     {
+        
+
         public MainWindow()
         {
             InitializeComponent();
             IO_Manager data = new IO_Manager(this);
         }
 
-        private void MainWindow_Load(object sender, EventArgs e)
+        public void SetLeft_Display(Image<Bgr, Byte> img)
         {
-
+            //might want to grab the image instead of having IO_Manger set the imagebox
+            Left_Display.Image = img.Resize(Left_Display.Width,Left_Display.Height,Emgu.CV.CvEnum.INTER.CV_INTER_LINEAR);
         }
 
         public void SetRight_Display(Image<Bgr, Byte> img)
         {
-            Right_Display.Image = img;
+            //might want to grab the image instead of having IO_Manger set the imagebox
+            Right_Display.Image = img.Resize(Right_Display.Width, Right_Display.Height, Emgu.CV.CvEnum.INTER.CV_INTER_LINEAR);
         }
 
-        public void SetLeft_Display(Image<Bgr, Byte> img)
-        {
-            Left_Display.Image = img;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            LidarVisulizer frm = new LidarVisulizer();
-            frm.Show();
-        }
+        
     }
 }

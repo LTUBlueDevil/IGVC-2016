@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{87C23288-E1B3-410D-83B3-06114B996CF7}</ProjectGuid>
+    <ProjectGuid>{11AAD4D6-563D-4F9E-A1FD-097401976269}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IGVC_2016</RootNamespace>
@@ -32,8 +32,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Emgu.CV">
+      <HintPath>..\..\..\..\..\..\..\Emgu\emgucv-windows-universal-cuda 2.9.0.1922\bin\Emgu.CV.dll</HintPath>
+    </Reference>
     <Reference Include="Emgu.CV.UI">
       <HintPath>..\..\..\..\..\..\..\Emgu\emgucv-windows-universal-cuda 2.9.0.1922\bin\Emgu.CV.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.Util">
+      <HintPath>..\..\..\..\..\..\..\Emgu\emgucv-windows-universal-cuda 2.9.0.1922\bin\Emgu.Util.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code\DataIO\IO_Manager.cs" />
     <Compile Include="Code\DataIO\SaveFile.cs" />
     <Compile Include="Code\Lidar\Lidar.cs" />
     <Compile Include="MainWindow.cs">
@@ -57,6 +64,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Code\Lidar\LidarVisulizer.resx" />
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -82,10 +90,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Code\MachineLearning\" />
-  </ItemGroup>
-<<<<<<< HEAD
   <ItemGroup>
     <Content Include="cublas64_42_9.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -154,8 +158,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-=======
->>>>>>> parent of 289b635... Created IO Manager
+  <ItemGroup>
+    <Folder Include="Code\MachineLearning\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
