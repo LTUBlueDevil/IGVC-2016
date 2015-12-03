@@ -74,7 +74,7 @@
             // 
             // Left_Display
             // 
-            this.Left_Display.Location = new System.Drawing.Point(26, 23);
+            this.Left_Display.Location = new System.Drawing.Point(6, 6);
             this.Left_Display.Name = "Left_Display";
             this.Left_Display.Size = new System.Drawing.Size(331, 275);
             this.Left_Display.TabIndex = 5;
@@ -82,7 +82,7 @@
             // 
             // Right_Display
             // 
-            this.Right_Display.Location = new System.Drawing.Point(403, 23);
+            this.Right_Display.Location = new System.Drawing.Point(457, 6);
             this.Right_Display.Name = "Right_Display";
             this.Right_Display.Size = new System.Drawing.Size(331, 275);
             this.Right_Display.TabIndex = 4;
@@ -95,7 +95,7 @@
             this.ClientSize = new System.Drawing.Size(827, 522);
             this.Controls.Add(this.tabControl1);
             this.Name = "MainWindow";
-            this.Text = "Form1";
+            this.Text = "Main Window";
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Left_Display)).EndInit();
