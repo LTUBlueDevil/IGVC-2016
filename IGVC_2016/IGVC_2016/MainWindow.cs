@@ -22,14 +22,14 @@ namespace IGVC_2016
 {
     public partial class MainWindow : Form
     {
-        
-
         public MainWindow()
         {
             InitializeComponent();
             IO_Manager data = new IO_Manager(this);
+
         }
 
+        #region remove later
         public void SetLeft_Display(Image<Bgr, Byte> img)
         {
             //might want to grab the image instead of having IO_Manger set the imagebox
@@ -42,6 +42,7 @@ namespace IGVC_2016
             Right_Display.Image = img.Resize(Right_Display.Width, Right_Display.Height, Emgu.CV.CvEnum.INTER.CV_INTER_LINEAR);
         }
 
-        
+        #endregion
+
     }
 }

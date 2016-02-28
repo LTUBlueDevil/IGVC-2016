@@ -1,7 +1,9 @@
 ﻿using Emgu.CV;
 using Emgu.CV.Structure;
+using IGVC_2016.Code.Lidar_Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +35,9 @@ namespace IGVC_2016.Code.DataIO
 
             Left_Camera.Start();
             Right_Camera.Start();
+
+            // Create lidar object
+            Lidar l = new Lidar(); 
         }
 
         void Right_Camera_ImageGrabbed(object sender, EventArgs e)
