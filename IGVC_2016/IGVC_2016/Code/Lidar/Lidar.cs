@@ -13,19 +13,23 @@ using IGVC_Controller.Code.DataIO;
 
 /*Created by: Vince Nicolazzo
  * Created on: (Sometime in November 2015)
- * Last edited: 12/1/2015
+ * Last edited: 2/28/2016
  * 
- * This will handle all inputs and outputs for the robot
+ * When Lidar class is created, a thread will be created to collect 
+ * Raw data and save it to a public variable
  */
 namespace IGVC_2016.Code.Lidar_Data
 {
     class Lidar
     {
+        //"urg" is the name of the Lidar manufacturer
         SerialPort urg = new SerialPort();
+
         BackgroundWorker lidarBW = new BackgroundWorker();
 
-        public int start_step = 0;
-        public int end_step = 1080;
+        //defining
+        private int start_step = 0;
+        private int end_step = 1080;
 
         public Lidar()
         {
@@ -34,7 +38,11 @@ namespace IGVC_2016.Code.Lidar_Data
             
             try { urg.Open(); }
             catch (Exception e) { MessageBox.Show(e.ToString()); }
+
+            //Assign Event Handler this.Process to DoWork
             lidarBW.DoWork += this.Process;
+
+            //Run Thread (this.Porcess)
             lidarBW.RunWorkerAsync();
         }
 
@@ -45,6 +53,8 @@ namespace IGVC_2016.Code.Lidar_Data
 
             string sData = urg.ReadLine();//Raw Scanner data
             long timeStamp = 0;
+
+            //Possibly save distances to a public variable?
             List<long> distances = new List<long>();
             SCIP_Reader.MD(sData, ref timeStamp, ref distances);
         }
