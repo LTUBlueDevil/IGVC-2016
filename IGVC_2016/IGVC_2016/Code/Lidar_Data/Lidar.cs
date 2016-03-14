@@ -36,14 +36,18 @@ namespace IGVC_2016.Code.Lidar_Data
             urg.PortName = "COM5";
             urg.BaudRate = 115200;
             
-            try { urg.Open(); }
+            try 
+            {   
+                urg.Open(); 
+
+                //Assign Event Handler this.Process to DoWork
+                lidarBW.DoWork += this.Process;
+
+                //Run Thread (this.Porcess)
+                lidarBW.RunWorkerAsync();
+            }
             catch (Exception e) { MessageBox.Show(e.ToString()); }
-
-            //Assign Event Handler this.Process to DoWork
-            lidarBW.DoWork += this.Process;
-
-            //Run Thread (this.Porcess)
-            lidarBW.RunWorkerAsync();
+           
         }
 
         public void Process(object sender, DoWorkEventArgs e)

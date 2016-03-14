@@ -7,6 +7,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IGVC_2016.Code.Camera_Data;
+using System.Threading;
 
 namespace IGVC_2016.Code.DataIO
 {
@@ -15,42 +17,41 @@ namespace IGVC_2016.Code.DataIO
         //Allows the IO_Manager to set objects on the main form
         private MainWindow parent;
 
-        //Create camera captures
-        private Capture Left_Camera = null;
-        private Capture Right_Camera = null;
+        // Create lidar object
+        Lidar l = new Lidar(); 
 
-        //in the future want something like {private set; public get}
-        private Image<Bgr, Byte> Left_Image;
-        private Image<Bgr, Byte> Right_Image;
+        //Create Camera Objects
+        Camera Right = new Camera(0);
+        Camera Left = new Camera(1);
 
+        Thread oThread;
         public IO_Manager(MainWindow form)
         {
+            //use parent variable to change Main Form
             parent = form;
 
-            Left_Camera = new Capture(0);
-            Right_Camera = new Capture(0);
-
-            Left_Camera.ImageGrabbed += Left_Camera_ImageGrabbed;
-            Right_Camera.ImageGrabbed += Right_Camera_ImageGrabbed;
-
-            Left_Camera.Start();
-            Right_Camera.Start();
-
-            // Create lidar object
-            Lidar l = new Lidar(); 
+            //Create Thread
+            ThreadStart thr = new ThreadStart(this.Process);
+            oThread = new Thread(thr);
+            oThread.Start();
         }
 
-        void Right_Camera_ImageGrabbed(object sender, EventArgs e)
+        public void Process()
         {
-            Right_Image = Right_Camera.RetrieveBgrFrame();
-            parent.SetRight_Display(Right_Image);
+            while (oThread.IsAlive)
+            {
+                parent.SetRight_Display(Right.img);
+                parent.SetLeft_Display(Left.img);
+            }
+           
         }
 
-        private void Left_Camera_ImageGrabbed(object sender, EventArgs e)
+        public void ShutDown()
         {
-            Left_Image = Left_Camera.RetrieveBgrFrame();
-            parent.SetLeft_Display(Left_Image);
+            //Shutdown all Threads
+            oThread.Abort();
+            Right.Shutdown();
+            Left.Shutdown();
         }
-
     }
 }

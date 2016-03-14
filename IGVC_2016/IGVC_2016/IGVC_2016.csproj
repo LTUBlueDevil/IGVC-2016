@@ -59,10 +59,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code\Camera_Data\Camera.cs" />
     <Compile Include="Code\DataIO\IO_Manager.cs" />
     <Compile Include="Code\DataIO\SaveFile.cs" />
     <Compile Include="Code\DataIO\SCIP_library.cs" />
-    <Compile Include="Code\Lidar\Lidar.cs" />
+    <Compile Include="Code\Lidar_Data\Lidar.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,7 +72,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Code\Lidar\LidarVisulizer.resx" />
+    <EmbeddedResource Include="Code\Lidar_Data\LidarVisulizer.resx" />
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>

@@ -22,27 +22,30 @@ namespace IGVC_2016
 {
     public partial class MainWindow : Form
     {
+        IO_Manager data;
         public MainWindow()
         {
             InitializeComponent();
-            IO_Manager data = new IO_Manager(this);
-
+            data = new IO_Manager(this);
         }
 
-        #region remove later
         public void SetLeft_Display(Image<Bgr, Byte> img)
         {
             //might want to grab the image instead of having IO_Manger set the imagebox
-            Left_Display.Image = img.Resize(Left_Display.Width,Left_Display.Height,Emgu.CV.CvEnum.INTER.CV_INTER_LINEAR);
+            try { Left_Display.Image = img.Resize(Left_Display.Width, Left_Display.Height, Emgu.CV.CvEnum.INTER.CV_INTER_LINEAR); }
+            catch { }
         }
 
         public void SetRight_Display(Image<Bgr, Byte> img)
         {
             //might want to grab the image instead of having IO_Manger set the imagebox
-            Right_Display.Image = img.Resize(Right_Display.Width, Right_Display.Height, Emgu.CV.CvEnum.INTER.CV_INTER_LINEAR);
+            try { Right_Display.Image = img.Resize(Right_Display.Width, Right_Display.Height, Emgu.CV.CvEnum.INTER.CV_INTER_LINEAR); }
+            catch { }
         }
 
-        #endregion
-
+        private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            data.ShutDown();
+        }
     }
 }

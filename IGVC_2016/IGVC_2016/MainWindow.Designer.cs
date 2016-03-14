@@ -32,6 +32,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.LidarDisplay = new Emgu.CV.UI.ImageBox();
             this.Left_Display = new Emgu.CV.UI.ImageBox();
             this.Right_Display = new Emgu.CV.UI.ImageBox();
@@ -68,6 +69,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.checkBox1);
             this.tabPage2.Controls.Add(this.LidarDisplay);
             this.tabPage2.Controls.Add(this.Left_Display);
             this.tabPage2.Controls.Add(this.Right_Display);
@@ -79,6 +81,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Raw Data";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(44, 410);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(98, 21);
+            this.checkBox1.TabIndex = 7;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // LidarDisplay
             // 
@@ -124,8 +136,10 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainWindow";
             this.Text = "Main Window";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainWindow_FormClosed);
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LidarDisplay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Left_Display)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Right_Display)).EndInit();
@@ -142,6 +156,7 @@
         private Emgu.CV.UI.ImageBox Right_Display;
         private Emgu.CV.UI.ImageBox LidarDisplay;
         private System.Windows.Forms.TabPage tabPage3;
+        public System.Windows.Forms.CheckBox checkBox1;
     }
 }
 
