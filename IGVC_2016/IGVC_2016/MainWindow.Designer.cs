@@ -32,11 +32,11 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.LidarDisplay = new Emgu.CV.UI.ImageBox();
             this.Left_Display = new Emgu.CV.UI.ImageBox();
             this.Right_Display = new Emgu.CV.UI.ImageBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LidarDisplay)).BeginInit();
@@ -46,14 +46,14 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(12, 10);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1341, 488);
+            this.tabControl1.Size = new System.Drawing.Size(923, 488);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -62,14 +62,14 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage1.Size = new System.Drawing.Size(1333, 459);
+            this.tabPage1.Size = new System.Drawing.Size(915, 459);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Viewer";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.checkBox1);
+            this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.LidarDisplay);
             this.tabPage2.Controls.Add(this.Left_Display);
             this.tabPage2.Controls.Add(this.Right_Display);
@@ -77,24 +77,14 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(1333, 459);
+            this.tabPage2.Size = new System.Drawing.Size(915, 459);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Raw Data";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(44, 410);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(98, 21);
-            this.checkBox1.TabIndex = 7;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
             // LidarDisplay
             // 
-            this.LidarDisplay.Location = new System.Drawing.Point(548, 5);
+            this.LidarDisplay.Location = new System.Drawing.Point(316, 4);
             this.LidarDisplay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.LidarDisplay.Name = "LidarDisplay";
             this.LidarDisplay.Size = new System.Drawing.Size(294, 220);
@@ -112,7 +102,7 @@
             // 
             // Right_Display
             // 
-            this.Right_Display.Location = new System.Drawing.Point(1033, 5);
+            this.Right_Display.Location = new System.Drawing.Point(616, 4);
             this.Right_Display.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Right_Display.Name = "Right_Display";
             this.Right_Display.Size = new System.Drawing.Size(294, 220);
@@ -123,15 +113,24 @@
             // 
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1333, 459);
+            this.tabPage3.Size = new System.Drawing.Size(915, 459);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "Connections";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(341, 367);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 17);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "label1";
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1365, 509);
+            this.ClientSize = new System.Drawing.Size(947, 509);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainWindow";
@@ -156,7 +155,7 @@
         private Emgu.CV.UI.ImageBox Right_Display;
         private Emgu.CV.UI.ImageBox LidarDisplay;
         private System.Windows.Forms.TabPage tabPage3;
-        public System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label1;
     }
 }
 

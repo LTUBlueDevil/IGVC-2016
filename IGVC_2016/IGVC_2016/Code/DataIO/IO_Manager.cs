@@ -42,6 +42,7 @@ namespace IGVC_2016.Code.DataIO
             {
                 parent.SetRight_Display(Right.img);
                 parent.SetLeft_Display(Left.img);
+                parent.DisplayLidarData(l.distances);
             }
            
         }
@@ -52,6 +53,7 @@ namespace IGVC_2016.Code.DataIO
             oThread.Abort();
             Right.Shutdown();
             Left.Shutdown();
+            l.Shutdown();
         }
     }
 }
