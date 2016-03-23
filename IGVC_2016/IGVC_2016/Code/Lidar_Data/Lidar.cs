@@ -83,7 +83,8 @@ namespace IGVC_2016.Code.Lidar_Data
 
         public void Shutdown()
         {
-            lidarBW.CancelAsync();
+            if(lidarBW.IsBusy)
+                lidarBW.CancelAsync();
         }
     }
 }

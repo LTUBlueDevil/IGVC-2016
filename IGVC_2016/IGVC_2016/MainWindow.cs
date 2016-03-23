@@ -47,9 +47,7 @@ namespace IGVC_2016
         public void DisplayLidarData(List<long> dist)
         {
             //generate Image here if Lidar Field
-
-            //need a delegate to display to form
-            //label1.Text = dist.ToArray<long>()[0].ToString();
+            //Luis
         }
 
         private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)

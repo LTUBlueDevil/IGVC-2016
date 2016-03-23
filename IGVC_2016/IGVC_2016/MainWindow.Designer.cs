@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
             this.LidarDisplay = new Emgu.CV.UI.ImageBox();
             this.Left_Display = new Emgu.CV.UI.ImageBox();
             this.Right_Display = new Emgu.CV.UI.ImageBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LidarDisplay)).BeginInit();
@@ -56,17 +56,6 @@
             this.tabControl1.Size = new System.Drawing.Size(923, 488);
             this.tabControl1.TabIndex = 0;
             // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage1.Size = new System.Drawing.Size(915, 459);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Viewer";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.label1);
@@ -82,9 +71,18 @@
             this.tabPage2.Text = "Raw Data";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(341, 367);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 17);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "label1";
+            // 
             // LidarDisplay
             // 
-            this.LidarDisplay.Location = new System.Drawing.Point(316, 4);
+            this.LidarDisplay.Location = new System.Drawing.Point(311, 4);
             this.LidarDisplay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.LidarDisplay.Name = "LidarDisplay";
             this.LidarDisplay.Size = new System.Drawing.Size(294, 220);
@@ -109,6 +107,17 @@
             this.Right_Display.TabIndex = 4;
             this.Right_Display.TabStop = false;
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage1.Size = new System.Drawing.Size(915, 459);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Viewer";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
             // tabPage3
             // 
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
@@ -116,15 +125,6 @@
             this.tabPage3.Size = new System.Drawing.Size(915, 459);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "Connections";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(341, 367);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 17);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "label1";
             // 
             // MainWindow
             // 
