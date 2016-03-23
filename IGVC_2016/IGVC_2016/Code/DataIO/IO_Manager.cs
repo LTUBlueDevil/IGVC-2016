@@ -18,7 +18,7 @@ namespace IGVC_2016.Code.DataIO
         private MainWindow parent;
 
         // Create lidar object
-        Lidar l = new Lidar(); 
+        Lidar l = new Lidar("COM4",115200); 
 
         //Create Camera Objects
         Camera Right = new Camera(0);

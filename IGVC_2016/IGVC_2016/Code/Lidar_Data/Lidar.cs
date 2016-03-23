@@ -23,7 +23,7 @@ namespace IGVC_2016.Code.Lidar_Data
     class Lidar
     {
         //"urg" is the name of the Lidar manufacturer
-        SerialPort urg = new SerialPort();
+        SerialPort urg = null;
 
         public List<long> distances = new List<long>();
 
@@ -33,10 +33,9 @@ namespace IGVC_2016.Code.Lidar_Data
         private int start_step = 0;
         private int end_step = 760;
 
-        public Lidar()
+        public Lidar(string ComPort, int Baudrate)
         {
-            urg.PortName = "COM4";
-            urg.BaudRate = 115200;
+            urg = new SerialPort(ComPort, Baudrate);
             
             try 
             {
@@ -53,7 +52,7 @@ namespace IGVC_2016.Code.Lidar_Data
            
         }
 
-        public void Process(object sender, DoWorkEventArgs e)
+        private void Process(object sender, DoWorkEventArgs e)
         {
             while(!lidarBW.CancellationPending)
             {
