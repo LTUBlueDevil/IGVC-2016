@@ -42,7 +42,10 @@ namespace IGVC_2016.Code.DataIO
             {
                 parent.SetRight_Display(Right.img);
                 parent.SetLeft_Display(Left.img);
-                parent.DisplayLidarData(l.distances);
+
+                //make sure there is data before displaying
+                if(l.distances.Count > 0)
+                    parent.DisplayLidarData(l.distances);
             }
            
         }

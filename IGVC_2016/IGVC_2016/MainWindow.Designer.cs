@@ -37,11 +37,14 @@
             this.Right_Display = new Emgu.CV.UI.ImageBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.ConvoNN_Image = new Emgu.CV.UI.ImageBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LidarDisplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Left_Display)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Right_Display)).BeginInit();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ConvoNN_Image)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -109,6 +112,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.ConvoNN_Image);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage1.Name = "tabPage1";
@@ -126,6 +130,15 @@
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "Connections";
             // 
+            // ConvoNN_Image
+            // 
+            this.ConvoNN_Image.Location = new System.Drawing.Point(6, 4);
+            this.ConvoNN_Image.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ConvoNN_Image.Name = "ConvoNN_Image";
+            this.ConvoNN_Image.Size = new System.Drawing.Size(294, 220);
+            this.ConvoNN_Image.TabIndex = 6;
+            this.ConvoNN_Image.TabStop = false;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -142,6 +155,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.LidarDisplay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Left_Display)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Right_Display)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ConvoNN_Image)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -156,6 +171,7 @@
         private Emgu.CV.UI.ImageBox LidarDisplay;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Label label1;
+        private Emgu.CV.UI.ImageBox ConvoNN_Image;
     }
 }
 

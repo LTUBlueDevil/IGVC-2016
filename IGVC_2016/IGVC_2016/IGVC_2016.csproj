@@ -65,6 +65,7 @@
     <Compile Include="Code\DataIO\SCIP_library.cs" />
     <Compile Include="Code\GPS_Data\GPS.cs" />
     <Compile Include="Code\Lidar_Data\Lidar.cs" />
+    <Compile Include="Code\Lidar_Data\LIDAR_Visualizer.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>

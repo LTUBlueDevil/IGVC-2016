@@ -50,17 +50,16 @@ namespace IGVC_2016
             //Luis
 
             Image<Rgb, byte> lid_img = new Image<Rgb, byte>(LidarDisplay.Width, LidarDisplay.Height);
-            int[] x = new int[1080];
-            int[] y = new int[1080];
+            int[] x = new int[dist.Count];
+            int[] y = new int[dist.Count];
             
             // Determines xy coordinates of each point in lidar vision list
             double deg = -45;
+            int i = 0; //track steps
             foreach (long point in dist)
             {
-                int i = 0; // tracks steps
-
-                x[i] = lid_img.Width / 2 + Convert.ToInt32(Math.Round(point * Math.Cos(deg))); //
-                y[i] = lid_img.Height / 2 - Convert.ToInt32(Math.Round(point * Math.Sin(deg)));
+                x[i] = lid_img.Width / 2 + Convert.ToInt32(Math.Round(point * Math.Cos(deg*Math.PI/180)));
+                y[i] = lid_img.Height / 2 + Convert.ToInt32(Math.Round(point * Math.Sin(deg*Math.PI/180)));
                 
                 i++;
                 deg += 270.00 / 1080.00; // inc by step size
