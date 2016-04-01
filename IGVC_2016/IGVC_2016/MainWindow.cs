@@ -48,6 +48,44 @@ namespace IGVC_2016
         {
             //generate Image here if Lidar Field
             //Luis
+
+            Image<Rgb, byte> lid_img = new Image<Rgb, byte>(LidarDisplay.Width, LidarDisplay.Height);
+            int[] x = new int[1080];
+            int[] y = new int[1080];
+            
+            // Determines xy coordinates of each point in lidar vision list
+            double deg = -45;
+            foreach (long point in dist)
+            {
+                int i = 0; // tracks steps
+
+                x[i] = lid_img.Width / 2 + Convert.ToInt32(Math.Round(point * Math.Cos(deg))); //
+                y[i] = lid_img.Height / 2 - Convert.ToInt32(Math.Round(point * Math.Sin(deg)));
+                
+                i++;
+                deg += 270.00 / 1080.00; // inc by step size
+            }
+
+            // Generates Lidar Image
+            // Create blank image
+            for (int h = 0; h < LidarDisplay.Height; h++)
+            {
+                for (int w = 0; w < LidarDisplay.Width; w++)
+                {
+                    lid_img.Data[h, w, 0] = 0; // B
+                    lid_img.Data[h, w, 1] = 0; // G
+                    lid_img.Data[h, w, 2] = 0; // R
+                }
+            }
+
+            // place dots at lidar points
+            for (int d = 0; d < 270; d++)
+            {
+                lid_img.Data[y[d], x[d], 0] = 255; // B
+                lid_img.Data[y[d], x[d], 1] = 255; // G
+                lid_img.Data[y[d], x[d], 2] = 255; // R
+            }
+
         }
 
         private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)
