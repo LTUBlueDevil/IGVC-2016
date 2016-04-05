@@ -65,7 +65,12 @@
     <Compile Include="Code\DataIO\SCIP_library.cs" />
     <Compile Include="Code\GPS_Data\GPS.cs" />
     <Compile Include="Code\Lidar_Data\Lidar.cs" />
-    <Compile Include="Code\Lidar_Data\LIDAR_Visualizer.cs" />
+    <Compile Include="Code\Lidar_Data\LIDAR_Visualizer_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\Lidar_Data\LIDAR_Visualizer_Form.designer.cs">
+      <DependentUpon>LIDAR_Visualizer_Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,7 +79,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Code\Lidar_Data\LidarVisulizer.resx" />
+    <EmbeddedResource Include="Code\Lidar_Data\LIDAR_Visualizer_Form.resx">
+      <DependentUpon>LIDAR_Visualizer_Form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>

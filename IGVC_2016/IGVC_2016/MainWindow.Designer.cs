@@ -36,8 +36,8 @@
             this.Left_Display = new Emgu.CV.UI.ImageBox();
             this.Right_Display = new Emgu.CV.UI.ImageBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.ConvoNN_Image = new Emgu.CV.UI.ImageBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LidarDisplay)).BeginInit();
@@ -85,10 +85,10 @@
             // 
             // LidarDisplay
             // 
-            this.LidarDisplay.Location = new System.Drawing.Point(311, 4);
+            this.LidarDisplay.Location = new System.Drawing.Point(305, 5);
             this.LidarDisplay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.LidarDisplay.Name = "LidarDisplay";
-            this.LidarDisplay.Size = new System.Drawing.Size(294, 220);
+            this.LidarDisplay.Size = new System.Drawing.Size(305, 305);
             this.LidarDisplay.TabIndex = 6;
             this.LidarDisplay.TabStop = false;
             // 
@@ -122,14 +122,6 @@
             this.tabPage1.Text = "Viewer";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 25);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(915, 459);
-            this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "Connections";
-            // 
             // ConvoNN_Image
             // 
             this.ConvoNN_Image.Location = new System.Drawing.Point(6, 4);
@@ -138,6 +130,14 @@
             this.ConvoNN_Image.Size = new System.Drawing.Size(294, 220);
             this.ConvoNN_Image.TabIndex = 6;
             this.ConvoNN_Image.TabStop = false;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(915, 459);
+            this.tabPage3.TabIndex = 0;
+            this.tabPage3.Text = "Connections";
             // 
             // MainWindow
             // 

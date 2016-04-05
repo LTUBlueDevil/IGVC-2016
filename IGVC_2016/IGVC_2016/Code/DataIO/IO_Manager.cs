@@ -30,7 +30,7 @@ namespace IGVC_2016.Code.DataIO
             //use parent variable to change Main Form
             parent = form;
 
-            //Create Thread
+            //Create Thread to get data
             ThreadStart thr = new ThreadStart(this.Process);
             oThread = new Thread(thr);
             oThread.Start();
@@ -46,6 +46,8 @@ namespace IGVC_2016.Code.DataIO
                 //make sure there is data before displaying
                 if(l.distances.Count > 0)
                     parent.DisplayLidarData(l.distances);
+
+                //chack for controller data
             }
            
         }

@@ -11,13 +11,6 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using IGVC_Controller.Code.DataIO;
 
-/*Created by: Vince Nicolazzo
- * Created on: (Sometime in November 2015)
- * Last edited: 3/16/2016
- * 
- * When Lidar class is created, a thread will be created to collect 
- * Raw data and save it to a public variable distances
- */
 namespace IGVC_2016.Code.Lidar_Data
 {
     class Lidar
@@ -25,6 +18,7 @@ namespace IGVC_2016.Code.Lidar_Data
         //"urg" is the name of the Lidar manufacturer
         SerialPort urg = null;
 
+        //data will be saved to and accessed by this variable
         public List<long> distances = new List<long>();
 
         BackgroundWorker lidarBW = new BackgroundWorker();

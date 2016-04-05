@@ -49,15 +49,47 @@ namespace IGVC_2016
             //generate Image here if Lidar Field
             //Luis
 
-            Image<Rgb, byte> lid_img = new Image<Rgb, byte>(LidarDisplay.Width, LidarDisplay.Height);
+            int height = LidarDisplay.Height;
+            int width = LidarDisplay.Width;
+
+            Image<Bgr, byte> lid_img = new Image<Bgr, byte>(width, height);
             int[] x = new int[dist.Count];
             int[] y = new int[dist.Count];
+
+            //Draw circles
+            for(int j= 5; j<=30; j+=5)
+            {
+                lid_img.Draw(new CircleF(new PointF(height/2, width/2), j * 10), new Bgr(Color.Gray), 1);
+            }
+
+            //Draw Vertiacl and Horizontal Lines
+            lid_img.Draw(new LineSegment2D(new Point(0, width/2), new Point(height, width/2)), new Bgr(Color.LightGray), 1);
+            lid_img.Draw(new LineSegment2D(new Point(height/2, 0), new Point(height/2, width)), new Bgr(Color.LightGray), 1);
+
             
             // Determines xy coordinates of each point in lidar vision list
             double deg = -45;
             int i = 0; //track steps
             foreach (long point in dist)
             {
+                double valInMeters = (double)point / 1000.0;
+
+                if (valInMeters == 0 || valInMeters >= 30.0)
+                    continue;
+
+                double angle = /*angle ratio*/ ((double)(1080 - i) / (double)dist.Count) * /*angle range*/ (135.0 * 2)
+                    - /*angle offset*/ 135.0;
+
+                //to radians
+                angle = (angle / 180.0) * Math.PI;
+                //angle 0 degrees = up
+
+                //y in meters
+                double yMeters = (Math.Cos(angle) * valInMeters);
+
+                //y in pixels (1 meter = 10 pixels)
+                //get rest from johns code
+
                 x[i] = lid_img.Width / 2 + Convert.ToInt32(Math.Round(point * Math.Cos(deg*Math.PI/180)));
                 y[i] = lid_img.Height / 2 + Convert.ToInt32(Math.Round(point * Math.Sin(deg*Math.PI/180)));
                 
