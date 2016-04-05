@@ -71,6 +71,7 @@ namespace IGVC_2016.Code.Lidar_Data
                         continue;
                     }
                 }
+                //consider thread.SLeep(100)
             }
         }
 

@@ -47,6 +47,10 @@
     <Reference Include="Emgu.Util">
       <HintPath>..\..\..\..\..\..\..\Emgu\emgucv-windows-x64-gpu 2.4.2.1777\bin\Emgu.Util.dll</HintPath>
     </Reference>
+    <Reference Include="Lengario UDP Library, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Lengario UDP Library.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -120,6 +124,7 @@
     <Content Include="cvextern.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Lengario UDP Library.dll" />
     <Content Include="npp64_42_9.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

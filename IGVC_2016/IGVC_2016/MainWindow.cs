@@ -29,6 +29,11 @@ namespace IGVC_2016
             data = new IO_Manager(this);
         }
 
+        public void UpdateLabel(string message)
+        {
+            label1.Text = message;
+        }
+
         public void SetLeft_Display(Image<Bgr, Byte> img)
         {
             //might want to grab the image instead of having IO_Manger set the imagebox

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using IGVC_2016.Code.Camera_Data;
 using System.Threading;
+using Lengario_UDP_Library;
 
 namespace IGVC_2016.Code.DataIO
 {
@@ -25,11 +26,19 @@ namespace IGVC_2016.Code.DataIO
         Camera Left = new Camera(1);
 
         Thread oThread;
+
+        UDP_Host networkHost;
+
         public IO_Manager(MainWindow form)
         {
             //use parent variable to change Main Form
             parent = form;
 
+            //setup host
+            networkHost = new UDP_Host();
+            networkHost.RegisterID(SampleMessage, "POST");
+            networkHost.StartServer();
+            
             //Create Thread to get data
             ThreadStart thr = new ThreadStart(this.Process);
             oThread = new Thread(thr);
@@ -47,9 +56,16 @@ namespace IGVC_2016.Code.DataIO
                 if(l.distances.Count > 0)
                     parent.DisplayLidarData(l.distances);
 
-                //chack for controller data
+                //check for controller data
+
             }
            
+        }
+
+        public string SampleMessage(string message)
+        {
+            parent.UpdateLabel(message);
+            return null;
         }
 
         public void ShutDown()
