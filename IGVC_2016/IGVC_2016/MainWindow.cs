@@ -47,6 +47,14 @@ namespace IGVC_2016
         public void DisplayLidarData(List<long> dist)
         {
             //generate Image here if Lidar Field
+            Image<Bgr, byte> img = new Image<Bgr, byte>(LidarDisplay.Width, LidarDisplay.Height);
+            for(int i = 5; i <=30; i+=5)
+            {
+                img.Draw(new CircleF(new PointF(300, 300), i * 10), new Bgr(Color.Gray), 1);
+            }
+
+            img.Draw(new LineSegment2D(new Point(0, 300), new Point(600, 300)), new Bgr(Color.LightGray), 1);
+            img.Draw(new LineSegment2D(new Point(300, 0), new Point(300, 600)), new Bgr(Color.LightGray), 1);
 
             //need a delegate to display to form
             //label1.Text = dist.ToArray<long>()[0].ToString();
