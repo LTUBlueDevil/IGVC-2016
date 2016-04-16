@@ -41,6 +41,10 @@
     <Reference Include="Emgu.Util">
       <HintPath>..\..\..\..\..\..\..\Emgu\emgucv-windows-x64-gpu 2.4.2.1777\bin\Emgu.Util.dll</HintPath>
     </Reference>
+    <Reference Include="Lengario UDP Library, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Lengario UDP Library.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -57,7 +61,14 @@
     <Compile Include="Code\DataIO\IO_Manager.cs" />
     <Compile Include="Code\DataIO\SaveFile.cs" />
     <Compile Include="Code\DataIO\SCIP_library.cs" />
+    <Compile Include="Code\GPS_Data\GPS.cs" />
     <Compile Include="Code\Lidar_Data\Lidar.cs" />
+    <Compile Include="Code\Lidar_Data\LIDAR_Visualizer_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\Lidar_Data\LIDAR_Visualizer_Form.designer.cs">
+      <DependentUpon>LIDAR_Visualizer_Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,7 +77,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Code\Lidar_Data\LidarVisulizer.resx" />
+    <EmbeddedResource Include="Code\Lidar_Data\LIDAR_Visualizer_Form.resx">
+      <DependentUpon>LIDAR_Visualizer_Form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -105,6 +118,7 @@
     <Content Include="cvextern.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Lengario UDP Library.dll" />
     <Content Include="npp64_42_9.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

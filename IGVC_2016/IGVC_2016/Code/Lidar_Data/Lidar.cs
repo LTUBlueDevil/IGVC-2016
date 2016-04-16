@@ -11,20 +11,14 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using IGVC_Controller.Code.DataIO;
 
-/*Created by: Vince Nicolazzo
- * Created on: (Sometime in November 2015)
- * Last edited: 3/16/2016
- * 
- * When Lidar class is created, a thread will be created to collect 
- * Raw data and save it to a public variable distances
- */
 namespace IGVC_2016.Code.Lidar_Data
 {
     class Lidar
     {
         //"urg" is the name of the Lidar manufacturer
-        SerialPort urg = new SerialPort();
+        SerialPort urg = null;
 
+        //data will be saved to and accessed by this variable
         public List<long> distances = new List<long>();
 
         BackgroundWorker lidarBW = new BackgroundWorker();
@@ -33,10 +27,9 @@ namespace IGVC_2016.Code.Lidar_Data
         private int start_step = 0;
         private int end_step = 760;
 
-        public Lidar()
+        public Lidar(string ComPort, int Baudrate)
         {
-            urg.PortName = "COM4";
-            urg.BaudRate = 115200;
+            urg = new SerialPort(ComPort, Baudrate);
             
             try 
             {
@@ -53,7 +46,7 @@ namespace IGVC_2016.Code.Lidar_Data
            
         }
 
-        public void Process(object sender, DoWorkEventArgs e)
+        private void Process(object sender, DoWorkEventArgs e)
         {
             while(!lidarBW.CancellationPending)
             {
@@ -78,12 +71,14 @@ namespace IGVC_2016.Code.Lidar_Data
                         continue;
                     }
                 }
+                //consider thread.SLeep(100)
             }
         }
 
         public void Shutdown()
         {
-            lidarBW.CancelAsync();
+            if(lidarBW.IsBusy)
+                lidarBW.CancelAsync();
         }
     }
 }
