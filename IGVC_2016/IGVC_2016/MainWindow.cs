@@ -29,6 +29,11 @@ namespace IGVC_2016
             data = new IO_Manager(this);
         }
 
+        public void UpdateLabel(string message)
+        {
+            label1.Text = message;
+        }
+
         public void SetLeft_Display(Image<Bgr, Byte> img)
         {
             //might want to grab the image instead of having IO_Manger set the imagebox
@@ -47,17 +52,77 @@ namespace IGVC_2016
         public void DisplayLidarData(List<long> dist)
         {
             //generate Image here if Lidar Field
-            Image<Bgr, byte> img = new Image<Bgr, byte>(LidarDisplay.Width, LidarDisplay.Height);
-            for(int i = 5; i <=30; i+=5)
+
+            //Luis
+
+            int height = LidarDisplay.Height;
+            int width = LidarDisplay.Width;
+
+            Image<Bgr, byte> lid_img = new Image<Bgr, byte>(width, height);
+            int[] x = new int[dist.Count];
+            int[] y = new int[dist.Count];
+
+            //Draw circles
+            for(int j= 5; j<=30; j+=5)
             {
-                img.Draw(new CircleF(new PointF(300, 300), i * 10), new Bgr(Color.Gray), 1);
+                lid_img.Draw(new CircleF(new PointF(height/2, width/2), j * 10), new Bgr(Color.Gray), 1);
             }
 
-            img.Draw(new LineSegment2D(new Point(0, 300), new Point(600, 300)), new Bgr(Color.LightGray), 1);
-            img.Draw(new LineSegment2D(new Point(300, 0), new Point(300, 600)), new Bgr(Color.LightGray), 1);
+            //Draw Vertiacl and Horizontal Lines
+            lid_img.Draw(new LineSegment2D(new Point(0, width/2), new Point(height, width/2)), new Bgr(Color.LightGray), 1);
+            lid_img.Draw(new LineSegment2D(new Point(height/2, 0), new Point(height/2, width)), new Bgr(Color.LightGray), 1);
 
-            //need a delegate to display to form
-            //label1.Text = dist.ToArray<long>()[0].ToString();
+            
+            // Determines xy coordinates of each point in lidar vision list
+            double deg = -45;
+            int i = 0; //track steps
+            foreach (long point in dist)
+            {
+                double valInMeters = (double)point / 1000.0;
+
+                if (valInMeters == 0 || valInMeters >= 30.0)
+                    continue;
+
+                double angle = /*angle ratio*/ ((double)(1080 - i) / (double)dist.Count) * /*angle range*/ (135.0 * 2)
+                    - /*angle offset*/ 135.0;
+
+                //to radians
+                angle = (angle / 180.0) * Math.PI;
+                //angle 0 degrees = up
+
+                //y in meters
+                double yMeters = (Math.Cos(angle) * valInMeters);
+
+                //y in pixels (1 meter = 10 pixels)
+                //get rest from johns code
+
+                x[i] = lid_img.Width / 2 + Convert.ToInt32(Math.Round(point * Math.Cos(deg*Math.PI/180)));
+                y[i] = lid_img.Height / 2 + Convert.ToInt32(Math.Round(point * Math.Sin(deg*Math.PI/180)));
+                
+                i++;
+                deg += 270.00 / 1080.00; // inc by step size
+            }
+
+            // Generates Lidar Image
+            // Create blank image
+            for (int h = 0; h < LidarDisplay.Height; h++)
+            {
+                for (int w = 0; w < LidarDisplay.Width; w++)
+                {
+                    lid_img.Data[h, w, 0] = 0; // B
+                    lid_img.Data[h, w, 1] = 0; // G
+                    lid_img.Data[h, w, 2] = 0; // R
+                }
+            }
+
+            // place dots at lidar points
+            for (int d = 0; d < 270; d++)
+            {
+                lid_img.Data[y[d], x[d], 0] = 255; // B
+                lid_img.Data[y[d], x[d], 1] = 255; // G
+                lid_img.Data[y[d], x[d], 2] = 255; // R
+            }
+
         }
 
         private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)
