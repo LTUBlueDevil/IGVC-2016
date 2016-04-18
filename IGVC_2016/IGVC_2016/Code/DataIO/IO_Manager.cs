@@ -56,6 +56,8 @@ namespace IGVC_2016.Code.DataIO
                 if(l.distances.Count > 0)
                     parent.DisplayLidarData(l.distances);
 
+                parent.DisplayLidarData(new List<long>() { 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, });
+
                 //check for controller data
 
             }

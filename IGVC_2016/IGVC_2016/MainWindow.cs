@@ -51,6 +51,8 @@ namespace IGVC_2016
 
         public void DisplayLidarData(List<long> dist)
         {
+
+            #region Generate LIDAR MAP
             //generate Image here if Lidar Field
 
             int height = LidarDisplay.Height;
@@ -69,36 +71,37 @@ namespace IGVC_2016
             //Draw Vertiacl and Horizontal Lines
             lid_img.Draw(new LineSegment2D(new Point(0, width/2), new Point(height, width/2)), new Bgr(Color.LightGray), 1);
             lid_img.Draw(new LineSegment2D(new Point(height/2, 0), new Point(height/2, width)), new Bgr(Color.LightGray), 1);
+            #endregion
 
-            
             // Determines xy coordinates of each point in lidar vision list
             double deg = -45;
             int i = 0; //track steps
+
             foreach (long point in dist)//iterate through each point in List
             {
-                double valInMeters = (double)point / 1000.0;
+                //double valInMeters = (double)point / 1000.0;
 
-                if (valInMeters == 0 || valInMeters >= 30.0)
-                    continue;
+                //if (valInMeters == 0 || valInMeters >= 30.0)
+                //    continue;
 
-                double angle = /*angle ratio*/ ((double)(1080 - i) / (double)dist.Count) * /*angle range*/ (135.0 * 2)
-                    - /*angle offset*/ 135.0;
+                //double angle = /*angle ratio*/ ((double)(1080 - i) / (double)dist.Count) * /*angle range*/ (135.0 * 2)
+                //    - /*angle offset*/ 135.0;
 
-                //to radians
-                angle = (angle / 180.0) * Math.PI;
-                //angle 0 degrees = up
+                ////to radians
+                //angle = (angle / 180.0) * Math.PI;
+                ////angle 0 degrees = up
 
-                //y in meters
-                double yMeters = (Math.Cos(angle) * valInMeters);
+                ////y in meters
+                //double yMeters = (Math.Cos(angle) * valInMeters);
 
-                //y in pixels (1 meter = 10 pixels)
-                //get rest from johns code
+                ////y in pixels (1 meter = 10 pixels)
+                ////get rest from johns code
 
                 x[i] = lid_img.Width / 2 + Convert.ToInt32(Math.Round(point * Math.Cos(deg*Math.PI/180)));
-                y[i] = lid_img.Height / 2 + Convert.ToInt32(Math.Round(point * Math.Sin(deg*Math.PI/180)));
+                y[i] = -1*lid_img.Height / 2 + Convert.ToInt32(Math.Round(point * Math.Sin(deg*Math.PI/180)));
                 
                 i++;
-                deg += 270.00 / 1080.00; // inc by step size
+                deg += 3.00; // inc by step size
             }
 
             // Generates Lidar Image

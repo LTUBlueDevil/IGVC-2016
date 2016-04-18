@@ -1,5 +1,4 @@
 ﻿using Emgu.CV;
-using Emgu.CV.GPU;
 using Emgu.CV.Structure;
 using System;
 using System.Collections.Generic;
