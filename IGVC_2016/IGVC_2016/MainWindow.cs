@@ -53,8 +53,6 @@ namespace IGVC_2016
         {
             //generate Image here if Lidar Field
 
-            //Luis
-
             int height = LidarDisplay.Height;
             int width = LidarDisplay.Width;
 
@@ -76,7 +74,7 @@ namespace IGVC_2016
             // Determines xy coordinates of each point in lidar vision list
             double deg = -45;
             int i = 0; //track steps
-            foreach (long point in dist)
+            foreach (long point in dist)//iterate through each point in List
             {
                 double valInMeters = (double)point / 1000.0;
 
