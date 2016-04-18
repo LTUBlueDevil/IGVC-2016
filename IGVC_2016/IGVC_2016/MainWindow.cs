@@ -75,33 +75,13 @@ namespace IGVC_2016
 
             // Determines xy coordinates of each point in lidar vision list
             double deg = -45;
-            int i = 0; //track steps
 
-            foreach (long point in dist)//iterate through each point in List
+            for (int i = 0; i < dist.Count; i++)//iterate through each point in List
             {
-                //double valInMeters = (double)point / 1000.0;
+                x[i] = lid_img.Width / 2 + Convert.ToInt32(Math.Round(dist[i] * Math.Cos(deg * Math.PI / 180)));
+                y[i] = -1 * lid_img.Height / 2 + Convert.ToInt32(Math.Round(dist[i] * Math.Sin(deg * Math.PI / 180)));
 
-                //if (valInMeters == 0 || valInMeters >= 30.0)
-                //    continue;
-
-                //double angle = /*angle ratio*/ ((double)(1080 - i) / (double)dist.Count) * /*angle range*/ (135.0 * 2)
-                //    - /*angle offset*/ 135.0;
-
-                ////to radians
-                //angle = (angle / 180.0) * Math.PI;
-                ////angle 0 degrees = up
-
-                ////y in meters
-                //double yMeters = (Math.Cos(angle) * valInMeters);
-
-                ////y in pixels (1 meter = 10 pixels)
-                ////get rest from johns code
-
-                x[i] = lid_img.Width / 2 + Convert.ToInt32(Math.Round(point * Math.Cos(deg*Math.PI/180)));
-                y[i] = -1*lid_img.Height / 2 + Convert.ToInt32(Math.Round(point * Math.Sin(deg*Math.PI/180)));
-                
-                i++;
-                deg += 3.00; // inc by step size
+                deg += .25; // inc by step size
             }
 
             // Generates Lidar Image
