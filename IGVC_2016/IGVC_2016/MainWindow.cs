@@ -26,8 +26,6 @@ namespace IGVC_2016
         public MainWindow()
         {
             InitializeComponent();
-            LidarDisplay.Width = 601;
-            LidarDisplay.Height = 601;
             data = new IO_Manager(this);
         }
 
@@ -78,12 +76,12 @@ namespace IGVC_2016
             //Draw circles
             for(int j= 5; j<=30; j+=5)
             {
-                lid_img.Draw(new CircleF(new PointF(height/2, width/2), j * 10), new Bgr(Color.White), 1);
+                lid_img.Draw(new CircleF(new PointF(width / 2, height / 2), j * 10), new Bgr(Color.White), 1);
             }
 
             //Draw Vertiacl and Horizontal Lines
-            lid_img.Draw(new LineSegment2D(new Point(0, width/2), new Point(height, width/2)), new Bgr(Color.LightGray), 1);
-            lid_img.Draw(new LineSegment2D(new Point(height/2, 0), new Point(height/2, width)), new Bgr(Color.LightGray), 1);
+            lid_img.Draw(new LineSegment2D(new Point(width/2, 0), new Point(width/2, height)), new Bgr(Color.LightGray), 1);
+            lid_img.Draw(new LineSegment2D(new Point(0, height / 2), new Point(width, height / 2)), new Bgr(Color.LightGray), 1);
             #endregion
 
             // Determines xy coordinates of each point in lidar vision list
@@ -91,7 +89,7 @@ namespace IGVC_2016
 
             foreach (long valInMeters in data)//iterate through each point in List
             {
-                if (valInMeters == 0 || valInMeters >= 30000.0)
+                if (valInMeters == 0 || valInMeters >= 10000.0)
                     continue;
 
                 double x_inMeters = (valInMeters/1000.0 * Math.Cos(deg * Math.PI / 180));
@@ -99,21 +97,24 @@ namespace IGVC_2016
 
                 //y in pixels (300 pixels = 30 meters | 10 pixels = 1 meter)
                 //adjust y for screen coords (+300y is 0y | 0y is 300y | -300y is 600y)
-                int y = (int)(-1*(y_inMeters * 10) + 300);
+                int y = (int)(-1*(y_inMeters * 10*2) + height/2);
 
                 //x in pixels (10 pixels = 1 meter)
                 //adjust x for screen coords (-300x is 0x | 0x is 300x | 300x is 600x)
-                int x = (int)((x_inMeters * 10) + 300);
+                int x = (int)((x_inMeters * 10*2) + width/2);
 
                 deg += .25; // inc by step size
 
                 //plot data
-                lid_img.Data[y, x, 0] = 0;   // B
-                lid_img.Data[y, x, 1] = 255; // G
-                lid_img.Data[y, x, 2] = 255; // R
+                if (y < lid_img.Height && x < lid_img.Width)
+                {
+                    lid_img.Data[y, x, 0] = 0;   // B
+                    lid_img.Data[y, x, 1] = 255; // G
+                    lid_img.Data[y, x, 2] = 255; // R
+                }
             }
 
-            LidarDisplay.Image = lid_img;
+            LidarDisplay.Image = lid_img.Flip(Emgu.CV.CvEnum.FLIP.HORIZONTAL);
         }
 
         private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)
