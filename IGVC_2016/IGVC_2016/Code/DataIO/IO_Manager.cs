@@ -19,7 +19,8 @@ namespace IGVC_2016.Code.DataIO
         private MainWindow parent;
 
         // Create lidar object
-        Lidar l = new Lidar("COM4",115200); 
+        Lidar l;
+
 
         //Create Camera Objects
         Camera Right = new Camera(0);
@@ -43,6 +44,8 @@ namespace IGVC_2016.Code.DataIO
             ThreadStart thr = new ThreadStart(this.Process);
             oThread = new Thread(thr);
             oThread.Start();
+
+            l = new Lidar("COM4", 115200, parent.DisplayLidarData); 
         }
 
         public void Process()
@@ -53,10 +56,6 @@ namespace IGVC_2016.Code.DataIO
                 parent.SetLeft_Display(Left.img);
 
                 //make sure there is data before displaying
-                if(l.distances.Count > 0)
-                    parent.DisplayLidarData(l.distances);
-
-                parent.DisplayLidarData(new List<long>() { 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, });
 
                 //check for controller data
 
