@@ -95,11 +95,11 @@ namespace IGVC_2016
                 double x_inMeters = (valInMeters/1000.0 * Math.Cos(deg * Math.PI / 180));
                 double y_inMeters = (valInMeters/1000.0 * Math.Sin(deg * Math.PI / 180));
 
-                //y in pixels (300 pixels = 30 meters | 10 pixels = 1 meter)
+                //y in pixels (600 pixels = 30 meters | 20 pixels = 1 meter)
                 //adjust y for screen coords (+300y is 0y | 0y is 300y | -300y is 600y)
                 int y = (int)(-1*(y_inMeters * 10*2) + height/2);
 
-                //x in pixels (10 pixels = 1 meter)
+                //x in pixels (20 pixels = 1 meter)
                 //adjust x for screen coords (-300x is 0x | 0x is 300x | 300x is 600x)
                 int x = (int)((x_inMeters * 10*2) + width/2);
 
