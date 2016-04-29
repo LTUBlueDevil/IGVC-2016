@@ -29,13 +29,15 @@ namespace IGVC_2016.Code.GPS_Data
                 gpsBW.RunWorkerAsync();
             }
             catch(Exception e) { MessageBox.Show(e.ToString());}
+
+            //need to setup delegate for using GPS data
         }
 
         private void Process(object sender, DoWorkEventArgs e)
         {
             while(!gpsBW.CancellationPending)
             {
-                //get GPS Data and update NEMA variable
+                NEMA = gps.ReadExisting();
             }
         }
 

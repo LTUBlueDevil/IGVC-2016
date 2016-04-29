@@ -48,78 +48,56 @@ namespace IGVC_2016
             catch { }
         }
 
-        
-        public void DisplayLidarData(List<long> dist)
+        public int GetLidarHeight()
         {
-            //get Lidar data
-            List<long> data = new List<long>(dist);
+            return LidarDisplay.Height;
+        }
 
-            #region Generate LIDAR MAP
-            //generate Image here if Lidar Field
+        public int GetLidarWidth()
+        {
+            return LidarDisplay.Width;
+        }
 
-            int height = LidarDisplay.Height;
-            int width = LidarDisplay.Width;
+        public void DisplayLidarData(Image<Bgr, Byte> img)
+        {
+            LidarDisplay.Image = img;
+        }
 
-            Image<Bgr, byte> lid_img = new Image<Bgr, byte>(width, height);
+        public void DisplayGPSDAta(string data)
+        {
+            label1.Text = data.ToString();
+        }
 
-            // Create blank image
-            for (int h = 0; h < LidarDisplay.Height; h++)
-            {
-                for (int w = 0; w < LidarDisplay.Width; w++)
-                {
-                    lid_img.Data[h, w, 0] = 0; // B
-                    lid_img.Data[h, w, 1] = 0; // G
-                    lid_img.Data[h, w, 2] = 0; // R
-                }
-            }
+        public void setLidarStatus(string status, string comPort, int baud)
+        {
+            LidarSerialButton.Text = status;
+            LidarCOM.Text = comPort;
+            LidarBaud.Text = baud.ToString();
+        }
 
-            //Draw circles
-            for(int j= 5; j<=30; j+=5)
-            {
-                lid_img.Draw(new CircleF(new PointF(width / 2, height / 2), j * 10), new Bgr(Color.White), 1);
-            }
-
-            //Draw Vertiacl and Horizontal Lines
-            lid_img.Draw(new LineSegment2D(new Point(width/2, 0), new Point(width/2, height)), new Bgr(Color.LightGray), 1);
-            lid_img.Draw(new LineSegment2D(new Point(0, height / 2), new Point(width, height / 2)), new Bgr(Color.LightGray), 1);
-            #endregion
-
-            // Determines xy coordinates of each point in lidar vision list
-            double deg = -45;
-
-            foreach (long valInMeters in data)//iterate through each point in List
-            {
-                if (valInMeters == 0 || valInMeters >= 10000.0)
-                    continue;
-
-                double x_inMeters = (valInMeters/1000.0 * Math.Cos(deg * Math.PI / 180));
-                double y_inMeters = (valInMeters/1000.0 * Math.Sin(deg * Math.PI / 180));
-
-                //y in pixels (600 pixels = 30 meters | 20 pixels = 1 meter)
-                //adjust y for screen coords (+300y is 0y | 0y is 300y | -300y is 600y)
-                int y = (int)(-1*(y_inMeters * 10*2) + height/2);
-
-                //x in pixels (20 pixels = 1 meter)
-                //adjust x for screen coords (-300x is 0x | 0x is 300x | 300x is 600x)
-                int x = (int)((x_inMeters * 10*2) + width/2);
-
-                deg += .25; // inc by step size
-
-                //plot data
-                if (y < lid_img.Height && x < lid_img.Width)
-                {
-                    lid_img.Data[y, x, 0] = 0;   // B
-                    lid_img.Data[y, x, 1] = 255; // G
-                    lid_img.Data[y, x, 2] = 255; // R
-                }
-            }
-
-            LidarDisplay.Image = lid_img.Flip(Emgu.CV.CvEnum.FLIP.HORIZONTAL);
+        public void setGPSData(string NEMA)
+        {
+            label1.Text = NEMA.ToString();
         }
 
         private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
             data.ShutDown();
+        }
+
+        private void LidarSerialButton_Click(object sender, EventArgs e)
+        {
+            if (LidarSerialButton.Text == "Open")
+            {
+                //tell IO_Manager to turn on Lidar
+                data.lidarSerial();
+
+                LidarSerialButton.Text = "Close";
+            }
+            else
+            {
+                LidarSerialButton.Text = "Open";
+            }
         }
     }
 }

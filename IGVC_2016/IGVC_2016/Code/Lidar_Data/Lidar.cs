@@ -37,14 +37,15 @@ namespace IGVC_2016.Code.Lidar_Data
 
             UpdateDelegate = UpdateDel;
 
+            //Assign Event Handler this.Process to DoWork
+            lidarBW.DoWork += this.Process;
+
             try 
             {
                 urg.NewLine = "\n\n";//this is critical
                 urg.Open(); 
 
-                //Assign Event Handler this.Process to DoWork
-                lidarBW.DoWork += this.Process;
-
+                
                 //Run Thread (this.Porcess)
                 lidarBW.RunWorkerAsync();
             }
@@ -70,7 +71,6 @@ namespace IGVC_2016.Code.Lidar_Data
                     string receive_data = urg.ReadLine();
                     if(!SCIP_Reader.MD(receive_data,ref timeStamp,ref distances))
                     {
-                        
                         break;
                     }
 
@@ -85,12 +85,26 @@ namespace IGVC_2016.Code.Lidar_Data
                     }
                 }
 
-                
-                //consider thread.SLeep(100)
             }
         }
 
-        
+        public bool isOpen()
+        {
+            return urg.IsOpen;
+        }
+
+        public void Open()
+        {
+            try
+            {
+                urg.NewLine = "\n\n";//this is critical
+                urg.Open();
+
+                //Run Thread (this.Porcess)
+                lidarBW.RunWorkerAsync();
+            }
+            catch (Exception e) { MessageBox.Show(e.ToString()); }
+        }
 
         public void Shutdown()
         {
