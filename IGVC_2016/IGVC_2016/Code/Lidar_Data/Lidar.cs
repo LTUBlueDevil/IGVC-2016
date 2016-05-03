@@ -81,6 +81,7 @@ namespace IGVC_2016.Code.Lidar_Data
 
                     if (distances != null)
                     {
+                        //try barrel detection with a still image
                         UpdateDelegate(distances);
                     }
                 }
