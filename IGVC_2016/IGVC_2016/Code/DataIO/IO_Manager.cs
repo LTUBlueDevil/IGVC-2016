@@ -184,26 +184,32 @@ namespace IGVC_2016.Code.DataIO
                 //        img.Draw(new CircleF(new PointF((float)a, (float)b), (float)r), new Bgr(Color.Red), 2);
                 //}
 
-                 if ((2 * (x[i] * y[i + 1 * mult] - x[i + 1 * mult] * y[i] - x[i] * y[i + 2 * mult] + x[i + 2 * mult] * y[i] + x[i + 1 * mult] * y[i + 2 * mult] - x[i + 2 * mult] * y[i + 1 * mult])) != 0)
+                // if ((2 * (x[i] * y[i + 1 * mult] - x[i + 1 * mult] * y[i] - x[i] * y[i + 2 * mult] + x[i + 2 * mult] * y[i] + x[i + 1 * mult] * y[i + 2 * mult] - x[i + 2 * mult] * y[i + 1 * mult])) != 0)
+                //{
+                //    a = ((x[i] ^ 2) * y[i + 1 * mult] - (x[i + 1 * mult]) * y[i + 2 * mult] - (x[i + 1 * mult] ^ 2) * y[i] + (x[i + 1 * mult] ^ 2) * y[i + 2 * mult] + (x[i + 2 * mult] ^ 2) * y[i] -
+                //        (x[i + 2 * mult] ^ 2) * y[i + 1 * mult] + (y[i] ^ 2) * y[i + 1 * mult] - (y[i] ^ 2) * y[i + 2 * mult] - y[i] * (y[i + 1 * mult] ^ 2) + y[i] * (y[i + 2 * mult] ^ 2) +
+                //        (y[i + 1 * mult] ^ 2) * y[i + 2 * mult] - y[i + 1 * mult] * (y[i + 2 * mult] ^ 2)) / (2 * (x[i] * y[i + 1 * mult] - x[i + 1 * mult] * y[i] - x[i] * y[i + 2 * mult] +
+                //        x[i + 2 * mult] * y[i] + x[i + 1 * mult] * y[i + 2 * mult] - x[i + 2 * mult] * y[i + 1 * mult]));
+
+                //    //a = (int)(-1 * (a * 10 * 2) + img.Height / 2);
+
+                //    b = (-(x[i] ^ 2) * x[i + 1 * mult] + (x[i] ^ 2) * x[i + 2 * mult] + x[i] * (x[i + 1 * mult] ^ 2) - x[i] * (x[i + 2 * mult] ^ 2) + x[i] * (y[i + 1 * mult] ^ 2) -
+                //        x[i] * (y[i + 2 * mult] ^ 2) - (x[i + 1 * mult] ^ 2) * x[i + 2 * mult] + x[i + 1 * mult] * (x[i + 2 * mult] ^ 2) - x[i + 1 * mult] * (y[i] ^ 2) + x[i + 1 * mult] * (y[i + 2 * mult] ^ 2) +
+                //        x[i + 2 * mult] * (y[i] ^ 2) - x[i + 2 * mult] * (y[i + 1 * mult] ^ 2)) / (2 * (x[i] * y[i + 1 * mult] - x[i + 1 * mult] * y[i] - x[i] * y[i + 2 * mult] +
+                //        x[i + 2 * mult] * y[i] + x[i + 1 * mult] * y[i + 2 * mult] - x[i + 2 * mult] * y[i + 1 * mult]));
+
+                //    //b = (int)((b * 10 * 2) + img.Width / 2);
+
+                //    r = Math.Sqrt(Math.Pow((x[i] - a), 2) + Math.Pow((y[i] - b), 2));
+
+                //   if (r < 20)
+                //        img.Draw(new CircleF(new PointF((float)a, (float)b), (float)r), new Bgr(Color.Red), 1);
+                //}
+
+                if ((2 * (x[i] * y[i + 1 * mult] - x[i + 1 * mult] * y[i] - x[i] * y[i + 2 * mult] + x[i + 2 * mult] * y[i] + x[i + 1 * mult] * y[i + 2 * mult] - x[i + 2 * mult] * y[i + 1 * mult])) != 0)
                 {
-                    a = ((x[i] ^ 2) * y[i + 1 * mult] - (x[i + 1 * mult]) * y[i + 2 * mult] - (x[i + 1 * mult] ^ 2) * y[i] + (x[i + 1 * mult] ^ 2) * y[i + 2 * mult] + (x[i + 2 * mult] ^ 2) * y[i] -
-                        (x[i + 2 * mult] ^ 2) * y[i + 1 * mult] + (y[i] ^ 2) * y[i + 1 * mult] - (y[i] ^ 2) * y[i + 2 * mult] - y[i] * (y[i + 1 * mult] ^ 2) + y[i] * (y[i + 2 * mult] ^ 2) +
-                        (y[i + 1 * mult] ^ 2) * y[i + 2 * mult] - y[i + 1 * mult] * (y[i + 2 * mult] ^ 2)) / (2 * (x[i] * y[i + 1 * mult] - x[i + 1 * mult] * y[i] - x[i] * y[i + 2 * mult] +
-                        x[i + 2 * mult] * y[i] + x[i + 1 * mult] * y[i + 2 * mult] - x[i + 2 * mult] * y[i + 1 * mult]));
-
-                    //a = (int)(-1 * (a * 10 * 2) + img.Height / 2);
-
-                    b = (-(x[i] ^ 2) * x[i + 1 * mult] + (x[i] ^ 2) * x[i + 2 * mult] + x[i] * (x[i + 1 * mult] ^ 2) - x[i] * (x[i + 2 * mult] ^ 2) + x[i] * (y[i + 1 * mult] ^ 2) -
-                        x[i] * (y[i + 2 * mult] ^ 2) - (x[i + 1 * mult] ^ 2) * x[i + 2 * mult] + x[i + 1 * mult] * (x[i + 2 * mult] ^ 2) - x[i + 1 * mult] * (y[i] ^ 2) + x[i + 1 * mult] * (y[i + 2 * mult] ^ 2) +
-                        x[i + 2 * mult] * (y[i] ^ 2) - x[i + 2 * mult] * (y[i + 1 * mult] ^ 2)) / (2 * (x[i] * y[i + 1 * mult] - x[i + 1 * mult] * y[i] - x[i] * y[i + 2 * mult] +
-                        x[i + 2 * mult] * y[i] + x[i + 1 * mult] * y[i + 2 * mult] - x[i + 2 * mult] * y[i + 1 * mult]));
-
-                    //b = (int)((b * 10 * 2) + img.Width / 2);
-
-                    r = Math.Sqrt(Math.Pow((x[i] - a), 2) + Math.Pow((y[i] - b), 2));
-
-                   if (r < 20)
-                        img.Draw(new CircleF(new PointF((float)a, (float)b), (float)r), new Bgr(Color.Red), 1);
+                    (x1^2*y2 - x1^2*y3 - x2^2*y1 + x2^2*y3 + x3^2*y1 - x3^2*y2 + y1^2*y2 - y1^2*y3 - y1*y2^2 + y1*y3^2 + y2^2*y3 - y2*y3^2)/(2*(x1*y2 - x2*y1 - x1*y3 + x3*y1 + x2*y3 - x3*y2))
+                    (- x1^2*x2 + x1^2*x3 + x1*x2^2 - x1*x3^2 + x1*y2^2 - x1*y3^2 - x2^2*x3 + x2*x3^2 - x2*y1^2 + x2*y3^2 + x3*y1^2 - x3*y2^2)/(2*(x1*y2 - x2*y1 - x1*y3 + x3*y1 + x2*y3 - x3*y2))
                 }
             }
 
