@@ -91,6 +91,8 @@ namespace IGVC_2016.Code.DataIO
         {
             //get Lidar data
             List<long> data = new List<long>(dist);
+            List<int> xArray = new List<int>();
+            List<int> yArray = new List<int>();
 
             #region Generate LIDAR MAP
             //generate Image here if Lidar Field
@@ -136,11 +138,12 @@ namespace IGVC_2016.Code.DataIO
                 //y in pixels (600 pixels = 30 meters | 20 pixels = 1 meter)
                 //adjust y for screen coords (+300y is 0y | 0y is 300y | -300y is 600y)
                 int y = (int)(-1 * (y_inMeters * 10 * 2) + height / 2);
+                yArray.Add((int)y);
 
                 //x in pixels (20 pixels = 1 meter)
                 //adjust x for screen coords (-300x is 0x | 0x is 300x | 300x is 600x)
                 int x = (int)((x_inMeters * 10 * 2) + width / 2);
-
+                xArray.Add((int)x);
                 deg += .25; // inc by step size
 
                 //plot data
@@ -151,8 +154,60 @@ namespace IGVC_2016.Code.DataIO
                     lid_img.Data[y, x, 2] = 255; // R
                 }
             }
+            lid_img = FindBarrel(lid_img, xArray, yArray);
 
             parent.DisplayLidarData(lid_img);
+        }
+
+        public Image<Bgr, byte> FindBarrel(Image<Bgr, byte> img, List<int> x, List<int> y)
+        {
+            double a,b,r;
+            int mult = 7;
+            //iterate through 
+            for (int i = 0; i < x.Count - 2 * mult; i++)
+            {
+                //if ((2 * (x[i] * y[i + 1] - x[i + 1] * y[i] - x[i] * y[i + 2] + x[i + 2] * y[i] + x[i + 1] * y[i + 2] - x[i + 2] * y[i + 1])) != 0)
+                //{
+                //    a = ((x[i] ^ 2) * y[i + 1] - (x[i + 1]) * y[i + 2] - (x[i + 1] ^ 2) * y[i] + (x[i + 1] ^ 2) * y[i + 2] + (x[i + 2] ^ 2) * y[i] -
+                //        (x[i + 2] ^ 2) * y[i + 1] + (y[i] ^ 2) * y[i + 1] - (y[i] ^ 2) * y[i + 2] - y[i] * (y[i + 1] ^ 2) + y[i] * (y[i + 2] ^ 2) +
+                //        (y[i + 1] ^ 2) * y[i + 2] - y[i + 1] * (y[i + 2] ^ 2)) / (2 * (x[i] * y[i + 1] - x[i + 1] * y[i] - x[i] * y[i + 2] +
+                //        x[i + 2] * y[i] + x[i + 1] * y[i + 2] - x[i + 2] * y[i + 1]));
+
+                //    b = (-(x[i] ^ 2) * x[i + 1] + (x[i] ^ 2) * x[i + 2] + x[i] * (x[i + 1] ^ 2) - x[i] * (x[i + 2] ^ 2) + x[i] * (y[i + 1] ^ 2) -
+                //        x[i] * (y[i + 2] ^ 2) - (x[i + 1] ^ 2) * x[i + 2] + x[i + 1] * (x[i + 2] ^ 2) - x[i + 1] * (y[i] ^ 2) + x[i + 1] * (y[i + 2] ^ 2) +
+                //        x[i + 2] * (y[i] ^ 2) - x[i + 2] * (y[i + 1] ^ 2)) / (2 * (x[i] * y[i + 1] - x[i + 1] * y[i] - x[i] * y[i + 2] +
+                //        x[i + 2] * y[i] + x[i + 1] * y[i + 2] - x[i + 2] * y[i + 1]));
+
+                //    r = Math.Sqrt(Math.Pow((x[i] - a), 2) + Math.Pow((y[i] - b), 2));
+
+                //    if(r<50)
+                //        img.Draw(new CircleF(new PointF((float)a, (float)b), (float)r), new Bgr(Color.Red), 2);
+                //}
+
+                 if ((2 * (x[i] * y[i + 1 * mult] - x[i + 1 * mult] * y[i] - x[i] * y[i + 2 * mult] + x[i + 2 * mult] * y[i] + x[i + 1 * mult] * y[i + 2 * mult] - x[i + 2 * mult] * y[i + 1 * mult])) != 0)
+                {
+                    a = ((x[i] ^ 2) * y[i + 1 * mult] - (x[i + 1 * mult]) * y[i + 2 * mult] - (x[i + 1 * mult] ^ 2) * y[i] + (x[i + 1 * mult] ^ 2) * y[i + 2 * mult] + (x[i + 2 * mult] ^ 2) * y[i] -
+                        (x[i + 2 * mult] ^ 2) * y[i + 1 * mult] + (y[i] ^ 2) * y[i + 1 * mult] - (y[i] ^ 2) * y[i + 2 * mult] - y[i] * (y[i + 1 * mult] ^ 2) + y[i] * (y[i + 2 * mult] ^ 2) +
+                        (y[i + 1 * mult] ^ 2) * y[i + 2 * mult] - y[i + 1 * mult] * (y[i + 2 * mult] ^ 2)) / (2 * (x[i] * y[i + 1 * mult] - x[i + 1 * mult] * y[i] - x[i] * y[i + 2 * mult] +
+                        x[i + 2 * mult] * y[i] + x[i + 1 * mult] * y[i + 2 * mult] - x[i + 2 * mult] * y[i + 1 * mult]));
+
+                    //a = (int)(-1 * (a * 10 * 2) + img.Height / 2);
+
+                    b = (-(x[i] ^ 2) * x[i + 1 * mult] + (x[i] ^ 2) * x[i + 2 * mult] + x[i] * (x[i + 1 * mult] ^ 2) - x[i] * (x[i + 2 * mult] ^ 2) + x[i] * (y[i + 1 * mult] ^ 2) -
+                        x[i] * (y[i + 2 * mult] ^ 2) - (x[i + 1 * mult] ^ 2) * x[i + 2 * mult] + x[i + 1 * mult] * (x[i + 2 * mult] ^ 2) - x[i + 1 * mult] * (y[i] ^ 2) + x[i + 1 * mult] * (y[i + 2 * mult] ^ 2) +
+                        x[i + 2 * mult] * (y[i] ^ 2) - x[i + 2 * mult] * (y[i + 1 * mult] ^ 2)) / (2 * (x[i] * y[i + 1 * mult] - x[i + 1 * mult] * y[i] - x[i] * y[i + 2 * mult] +
+                        x[i + 2 * mult] * y[i] + x[i + 1 * mult] * y[i + 2 * mult] - x[i + 2 * mult] * y[i + 1 * mult]));
+
+                    //b = (int)((b * 10 * 2) + img.Width / 2);
+
+                    r = Math.Sqrt(Math.Pow((x[i] - a), 2) + Math.Pow((y[i] - b), 2));
+
+                   if (r < 20)
+                        img.Draw(new CircleF(new PointF((float)a, (float)b), (float)r), new Bgr(Color.Red), 1);
+                }
+            }
+
+            return img;
         }
 
         public void DisplayGPS()
