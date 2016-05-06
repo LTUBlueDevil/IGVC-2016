@@ -58,9 +58,86 @@ namespace IGVC_2016
             return LidarDisplay.Width;
         }
 
-        public void DisplayLidarData(Image<Bgr, Byte> img)
+        public void DisplayLidarData(Image<Bgr, Byte> display, List<long> scan)
         {
-            LidarDisplay.Image = img;
+            LidarDisplay.Image = display;
+            //LidarScanData.Image = scan;//when "scan" is an Image
+
+            //create image from scan list
+            Image<Bgr, Byte> img = new Image<Bgr, Byte>(LidarScanData.Width,LidarScanData.Height,new Bgr(Color.Black));//create black image
+
+            long height = 0;
+            long width = 0;
+
+            for (int i = 0; i < scan.Count; i++)
+            {
+                double ratioH = (double)(scan[i])/scan.Max();
+                double ratioW = (double)(i+1)/scan.Count;
+
+                height = (long)(double)(ratioH*LidarScanData.Height);
+                width = (long)(double)(ratioW * LidarScanData.Width);
+
+                for(int h=0;h<height;h++)
+                {
+                    if (h < LidarScanData.Height)
+                    {
+                        img.Data[h, width, 0] = 0;  //blue
+                        img.Data[h, width, 1] = 255;//green
+                        img.Data[h, width, 2] = 255;//red
+                    }
+                }
+            }
+
+            LidarScanData.Image = img.Flip(Emgu.CV.CvEnum.FLIP.VERTICAL);
+
+            //Create diference image on LidarChangeIMage (THis needs to change)
+            Image<Bgr, Byte> dimg = new Image<Bgr, Byte>(LidarChangeData.Width, LidarChangeData.Height, new Bgr(Color.Black));//create black image
+            List<long> dscan = new List<long>();
+
+            height = 0;
+            width = 0;
+
+            for (int i = 1; i < scan.Count; i++)
+            {
+                dscan.Add(scan[i - 1] - scan[i]);
+            }
+
+            for (int i = 0; i < dscan.Count; i++)
+            {
+                double ratioH = (double)(100*dscan[i]) / dscan.Max();
+                double ratioW = (double)(i + 1) / dscan.Count;
+
+                height = (long)((double)ratioH * (LidarChangeData.Height/2));
+                width = (long)(double)(ratioW * LidarChangeData.Width);
+
+                if (height > 0)
+                {
+
+                    for (int h = LidarChangeData.Height / 2; h < height + LidarChangeData.Height / 2; h++)
+                    {
+                        if (h < LidarChangeData.Height)
+                        {
+                            dimg.Data[h, width, 0] = 0;  //blue
+                            dimg.Data[h, width, 1] = 255;//green
+                            dimg.Data[h, width, 2] = 255;//red
+                        }
+                    }
+                }
+                else
+                {
+                    for (int h = LidarChangeData.Height / 2; h > height +LidarChangeData.Height / 2; h--)
+                    {
+                        if (h > 0)
+                        {
+                            dimg.Data[h, width, 0] = 0;  //blue
+                            dimg.Data[h, width, 1] = 255;//green
+                            dimg.Data[h, width, 2] = 255;//red
+                        }
+                    }
+                }
+            }
+
+            LidarChangeData.Image = dimg;
         }
 
         public void DisplayGPSDAta(string data)

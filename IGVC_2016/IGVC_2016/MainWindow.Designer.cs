@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.LidarSerialButton = new System.Windows.Forms.Button();
@@ -44,7 +45,7 @@
             this.Left_Display = new Emgu.CV.UI.ImageBox();
             this.Right_Display = new Emgu.CV.UI.ImageBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.ConvoNN_Image = new Emgu.CV.UI.ImageBox();
+            this.LidarScanData = new Emgu.CV.UI.ImageBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
@@ -64,7 +65,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.LidarChangeData = new Emgu.CV.UI.ImageBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
@@ -74,11 +75,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.Left_Display)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Right_Display)).BeginInit();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ConvoNN_Image)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LidarScanData)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LidarChangeData)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -90,7 +92,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1232, 613);
+            this.tabControl1.Size = new System.Drawing.Size(1232, 648);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage2
@@ -110,6 +112,15 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Raw Data";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(916, 429);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(129, 34);
+            this.label10.TabIndex = 8;
+            this.label10.Text = "42° 28\' 26.8752\'\' N\r\n83° 14\' 57.246\'\' W\r\n";
             // 
             // trackBar1
             // 
@@ -225,24 +236,25 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.ConvoNN_Image);
+            this.tabPage1.Controls.Add(this.LidarChangeData);
+            this.tabPage1.Controls.Add(this.LidarScanData);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage1.Size = new System.Drawing.Size(1224, 584);
+            this.tabPage1.Size = new System.Drawing.Size(1224, 619);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Viewer";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // ConvoNN_Image
+            // LidarScanData
             // 
-            this.ConvoNN_Image.Location = new System.Drawing.Point(6, 4);
-            this.ConvoNN_Image.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ConvoNN_Image.Name = "ConvoNN_Image";
-            this.ConvoNN_Image.Size = new System.Drawing.Size(305, 305);
-            this.ConvoNN_Image.TabIndex = 6;
-            this.ConvoNN_Image.TabStop = false;
+            this.LidarScanData.Location = new System.Drawing.Point(82, 4);
+            this.LidarScanData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.LidarScanData.Name = "LidarScanData";
+            this.LidarScanData.Size = new System.Drawing.Size(1080, 300);
+            this.LidarScanData.TabIndex = 6;
+            this.LidarScanData.TabStop = false;
             // 
             // tabPage3
             // 
@@ -423,20 +435,20 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "COM Port";
             // 
-            // label10
+            // LidarChangeData
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(916, 429);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(129, 34);
-            this.label10.TabIndex = 8;
-            this.label10.Text = "42° 28\' 26.8752\'\' N\r\n83° 14\' 57.246\'\' W\r\n";
+            this.LidarChangeData.Location = new System.Drawing.Point(82, 308);
+            this.LidarChangeData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.LidarChangeData.Name = "LidarChangeData";
+            this.LidarChangeData.Size = new System.Drawing.Size(1080, 300);
+            this.LidarChangeData.TabIndex = 7;
+            this.LidarChangeData.TabStop = false;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1256, 659);
+            this.ClientSize = new System.Drawing.Size(1256, 689);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainWindow";
@@ -455,7 +467,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Left_Display)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Right_Display)).EndInit();
             this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ConvoNN_Image)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LidarScanData)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
@@ -463,6 +475,7 @@
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LidarChangeData)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -475,7 +488,7 @@
         private Emgu.CV.UI.ImageBox Right_Display;
         private Emgu.CV.UI.ImageBox LidarDisplay;
         private System.Windows.Forms.TabPage tabPage3;
-        private Emgu.CV.UI.ImageBox ConvoNN_Image;
+        private Emgu.CV.UI.ImageBox LidarScanData;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -505,6 +518,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label label10;
+        private Emgu.CV.UI.ImageBox LidarChangeData;
     }
 }
 

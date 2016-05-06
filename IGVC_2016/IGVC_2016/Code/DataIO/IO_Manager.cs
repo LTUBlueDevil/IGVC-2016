@@ -48,15 +48,15 @@ namespace IGVC_2016.Code.DataIO
             
 
             //send function to lidar constructor to assign function to delegate
-            l = new Lidar("COM4", 115200, this.DisplayLidarData); 
+            l = new Lidar("COM5", 115200, this.DisplayLidarData); 
 
             if(l.isOpen())
             {
-                parent.setLidarStatus("Close","COM4",115200);
+                parent.setLidarStatus("Close","COM5",115200);
             }
             else
             {
-                parent.setLidarStatus("Open", "COM4", 115200);
+                parent.setLidarStatus("Open", "COM5", 115200);
             }
 
             //Create GPS object
@@ -80,9 +80,6 @@ namespace IGVC_2016.Code.DataIO
 
                 //need to setup delegate for gps
                 //parent.setGPSData(gpsUnit.NEMA);
-
-                //check for controller data
-
             }
            
         }
@@ -156,7 +153,7 @@ namespace IGVC_2016.Code.DataIO
             }
             lid_img = FindBarrel(lid_img, xArray, yArray);
 
-            parent.DisplayLidarData(lid_img);
+            parent.DisplayLidarData(lid_img,dist);
         }
 
         public Image<Bgr, byte> FindBarrel(Image<Bgr, byte> img, List<int> x, List<int> y)
