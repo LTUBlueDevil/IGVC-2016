@@ -31,6 +31,13 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.LidarSerialButton = new System.Windows.Forms.Button();
+            this.LidarBaud = new System.Windows.Forms.TextBox();
+            this.LidarCOM = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.LidarDisplay = new Emgu.CV.UI.ImageBox();
@@ -57,15 +64,11 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.LidarSerialButton = new System.Windows.Forms.Button();
-            this.LidarBaud = new System.Windows.Forms.TextBox();
-            this.LidarCOM = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.label10 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LidarDisplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Left_Display)).BeginInit();
@@ -76,8 +79,6 @@
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -94,6 +95,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.trackBar1);
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.groupBox1);
@@ -108,6 +110,71 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Raw Data";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(9, 268);
+            this.trackBar1.Maximum = 50;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(294, 56);
+            this.trackBar1.TabIndex = 9;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.LidarSerialButton);
+            this.groupBox2.Controls.Add(this.LidarBaud);
+            this.groupBox2.Controls.Add(this.LidarCOM);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(31, 348);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(244, 190);
+            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "LIDAR";
+            // 
+            // LidarSerialButton
+            // 
+            this.LidarSerialButton.Location = new System.Drawing.Point(120, 137);
+            this.LidarSerialButton.Name = "LidarSerialButton";
+            this.LidarSerialButton.Size = new System.Drawing.Size(100, 38);
+            this.LidarSerialButton.TabIndex = 4;
+            this.LidarSerialButton.Text = "Open";
+            this.LidarSerialButton.UseVisualStyleBackColor = true;
+            this.LidarSerialButton.Click += new System.EventHandler(this.LidarSerialButton_Click);
+            // 
+            // LidarBaud
+            // 
+            this.LidarBaud.Location = new System.Drawing.Point(120, 76);
+            this.LidarBaud.Name = "LidarBaud";
+            this.LidarBaud.Size = new System.Drawing.Size(100, 30);
+            this.LidarBaud.TabIndex = 3;
+            // 
+            // LidarCOM
+            // 
+            this.LidarCOM.Location = new System.Drawing.Point(121, 40);
+            this.LidarCOM.Name = "LidarCOM";
+            this.LidarCOM.Size = new System.Drawing.Size(100, 30);
+            this.LidarCOM.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(15, 74);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(99, 25);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Baudrate";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 38);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(108, 25);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "COM Port";
             // 
             // groupBox1
             // 
@@ -163,7 +230,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage1.Size = new System.Drawing.Size(1224, 612);
+            this.tabPage1.Size = new System.Drawing.Size(1224, 584);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Viewer";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -184,7 +251,7 @@
             this.tabPage3.Controls.Add(this.groupBox3);
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1224, 612);
+            this.tabPage3.Size = new System.Drawing.Size(1224, 584);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "Connections";
             // 
@@ -356,70 +423,14 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "COM Port";
             // 
-            // groupBox2
+            // label10
             // 
-            this.groupBox2.Controls.Add(this.LidarSerialButton);
-            this.groupBox2.Controls.Add(this.LidarBaud);
-            this.groupBox2.Controls.Add(this.LidarCOM);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(31, 348);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(244, 190);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "LIDAR";
-            // 
-            // LidarSerialButton
-            // 
-            this.LidarSerialButton.Location = new System.Drawing.Point(120, 137);
-            this.LidarSerialButton.Name = "LidarSerialButton";
-            this.LidarSerialButton.Size = new System.Drawing.Size(100, 38);
-            this.LidarSerialButton.TabIndex = 4;
-            this.LidarSerialButton.Text = "Open";
-            this.LidarSerialButton.UseVisualStyleBackColor = true;
-            this.LidarSerialButton.Click += new System.EventHandler(this.LidarSerialButton_Click);
-            // 
-            // LidarBaud
-            // 
-            this.LidarBaud.Location = new System.Drawing.Point(120, 76);
-            this.LidarBaud.Name = "LidarBaud";
-            this.LidarBaud.Size = new System.Drawing.Size(100, 30);
-            this.LidarBaud.TabIndex = 3;
-            // 
-            // LidarCOM
-            // 
-            this.LidarCOM.Location = new System.Drawing.Point(121, 40);
-            this.LidarCOM.Name = "LidarCOM";
-            this.LidarCOM.Size = new System.Drawing.Size(100, 30);
-            this.LidarCOM.TabIndex = 2;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 74);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(99, 25);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Baudrate";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 38);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(108, 25);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "COM Port";
-            // 
-            // trackBar1
-            // 
-            this.trackBar1.Location = new System.Drawing.Point(9, 268);
-            this.trackBar1.Maximum = 50;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(294, 56);
-            this.trackBar1.TabIndex = 9;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(916, 429);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(129, 34);
+            this.label10.TabIndex = 8;
+            this.label10.Text = "42° 28\' 26.8752\'\' N\r\n83° 14\' 57.246\'\' W\r\n";
             // 
             // MainWindow
             // 
@@ -435,6 +446,9 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LidarDisplay)).EndInit();
@@ -449,9 +463,6 @@
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -493,6 +504,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Label label10;
     }
 }
 
