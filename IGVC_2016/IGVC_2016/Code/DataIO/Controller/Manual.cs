@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SharpDX.DirectInput;
+using System.IO.Ports;
 
 
 namespace IGVC_2016.Code.DataIO.Controller
 {
     class Manual
     {
-        Joystick joystick;
+        Joystick joystick; 
 
         public Manual()
         {
@@ -56,7 +57,7 @@ namespace IGVC_2016.Code.DataIO.Controller
             joystick.Acquire();
         }
 
-        public void Task()
+        public string Task()
         {
             // Poll events from joystick
             while (true)
@@ -77,6 +78,24 @@ namespace IGVC_2016.Code.DataIO.Controller
                     //str[6] = time value
                     //str[7] = "Sequence"
                     //str[8] = sequence number
+
+                    switch(str[1])
+                    {
+                        case "X":
+                            {
+                                double val = double.Parse(str[4]);
+                            
+                                //convert value to angle (-90 -> 90) to (0 -> 65535)
+                                val = 180*((65535 - val) / (65535))-90;
+
+                                //send angle to arduino
+                                return "F" + val.ToString();
+                            }
+                        default:
+                        {
+                            return null;//don't send anything
+                        }
+                    }
 
                     Console.WriteLine(state);
                 }

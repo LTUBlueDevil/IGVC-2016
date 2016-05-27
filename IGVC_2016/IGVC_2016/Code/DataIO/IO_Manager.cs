@@ -13,6 +13,7 @@ using System.Threading;
 using System.Drawing;
 using IGVC_2016.Code.GPS_Data;
 using IGVC_2016.Code.DataIO.Controller;
+using System.IO.Ports;
 
 namespace IGVC_2016.Code.DataIO
 {
@@ -28,6 +29,8 @@ namespace IGVC_2016.Code.DataIO
         //Create Camera Objects
         Camera Right = new Camera(0);
         Camera Left = new Camera(1);
+
+        SerialPort Arduino;
 
         Thread oThread;
 
@@ -48,7 +51,14 @@ namespace IGVC_2016.Code.DataIO
             //Create Thread to get data
             ThreadStart thr = new ThreadStart(this.Process);
             oThread = new Thread(thr);
-            
+
+            try 
+            { 
+                Arduino.BaudRate = 9600;
+                Arduino.PortName="COM4";
+                Arduino.Open();
+            }
+            catch { }
 
             //send function to lidar constructor to assign function to delegate
             l = new Lidar("COM5", 115200, this.DisplayLidarData); 
@@ -82,7 +92,10 @@ namespace IGVC_2016.Code.DataIO
             {
                 parent.SetRight_Display(Right.img);
                 parent.SetLeft_Display(Left.img);
-                controller.Task();
+
+                char[] buf = controller.Task().ToArray<char>();
+
+                Arduino.Write(buf, 0, buf.Length);
 
                 //need to setup delegate for gps
                 //parent.setGPSData(gpsUnit.NEMA);
