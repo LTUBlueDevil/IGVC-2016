@@ -93,9 +93,7 @@ namespace IGVC_2016.Code.DataIO
                 parent.SetRight_Display(Right.img);
                 parent.SetLeft_Display(Left.img);
 
-                char[] buf = controller.Task().ToArray<char>();
-
-                Arduino.Write(buf, 0, buf.Length);
+                Arduino.Write(controller.Task());
 
                 //need to setup delegate for gps
                 //parent.setGPSData(gpsUnit.NEMA);

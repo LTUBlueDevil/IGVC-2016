@@ -89,7 +89,7 @@ namespace IGVC_2016.Code.DataIO.Controller
                                 val = 180*((65535 - val) / (65535))-90;
 
                                 //send angle to arduino
-                                return "F" + val.ToString();
+                                return "F" + Math.Round(val, 2).ToString();
                             }
                         default:
                         {
