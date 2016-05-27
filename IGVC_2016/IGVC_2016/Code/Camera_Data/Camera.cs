@@ -22,7 +22,7 @@ namespace IGVC_2016.Code.Camera_Data
         public Camera(int num)
         {
 
-            lens = new Capture(1);
+            lens = new Capture(0);
             lens.ImageGrabbed += this.Process;
 
             lens.Start();

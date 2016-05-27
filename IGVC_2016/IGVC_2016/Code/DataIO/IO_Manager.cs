@@ -9,9 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using IGVC_2016.Code.Camera_Data;
 using System.Threading;
-using Lengario_UDP_Library;
+//using Lengario_UDP_Library;
 using System.Drawing;
 using IGVC_2016.Code.GPS_Data;
+using IGVC_2016.Code.DataIO.Controller;
 
 namespace IGVC_2016.Code.DataIO
 {
@@ -30,7 +31,9 @@ namespace IGVC_2016.Code.DataIO
 
         Thread oThread;
 
-        UDP_Host networkHost;
+        Manual controller;
+
+        //UDP_Host networkHost;
 
         public IO_Manager(MainWindow form)
         {
@@ -38,9 +41,9 @@ namespace IGVC_2016.Code.DataIO
             parent = form;
 
             //setup host
-            networkHost = new UDP_Host();
-            networkHost.RegisterID(SampleMessage, "POST");
-            networkHost.StartServer();
+            //networkHost = new UDP_Host();
+            //networkHost.RegisterID(SampleMessage, "POST");
+            //networkHost.StartServer();
             
             //Create Thread to get data
             ThreadStart thr = new ThreadStart(this.Process);
@@ -61,6 +64,8 @@ namespace IGVC_2016.Code.DataIO
 
             //Create GPS object
             //gpsUnit = new GPS("COM7", 9600);
+
+            controller = new Manual();
             
             oThread.Start();
         }
@@ -77,6 +82,7 @@ namespace IGVC_2016.Code.DataIO
             {
                 parent.SetRight_Display(Right.img);
                 parent.SetLeft_Display(Left.img);
+                controller.Task();
 
                 //need to setup delegate for gps
                 //parent.setGPSData(gpsUnit.NEMA);
