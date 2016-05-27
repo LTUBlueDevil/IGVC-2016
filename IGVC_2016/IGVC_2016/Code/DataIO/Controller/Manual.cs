@@ -57,49 +57,43 @@ namespace IGVC_2016.Code.DataIO.Controller
             joystick.Acquire();
         }
 
+        double val = 0;
+
         public string Task()
         {
             // Poll events from joystick
-            while (true)
+            joystick.Poll();                
+
+            var datas = joystick.GetBufferedData();
+            foreach (var state in datas)
             {
-                joystick.Poll();
-                
+                var str = state.ToString().Replace(',',' ').Split(' ');
+                //str[0] = "Offset:"
+                //str[1] = Button Name
+                //str[2] = Blank
+                //str[3] = "Value:"
+                //str[4] = Value
+                //str[5] = "TimeStamp"
+                //str[6] = time value
+                //str[7] = "Sequence"
+                //str[8] = sequence number
 
-                var datas = joystick.GetBufferedData();
-                foreach (var state in datas)
+                switch(state.Offset.ToString())
                 {
-                    var str = state.ToString().Replace(',',' ').Split(' ');
-                    //str[0] = "Offset:"
-                    //str[1] = Button Name
-                    //str[2] = Blank
-                    //str[3] = "Value:"
-                    //str[4] = Value
-                    //str[5] = "TimeStamp"
-                    //str[6] = time value
-                    //str[7] = "Sequence"
-                    //str[8] = sequence number
-
-                    switch(str[1])
+                case "X":
                     {
-                        case "X":
-                            {
-                                double val = double.Parse(str[4]);
+                        val = state.Value;
                             
-                                //convert value to angle (-90 -> 90) to (0 -> 65535)
-                                val = 180*((65535 - val) / (65535))-90;
+                        //convert value to angle (-90 -> 90) to (0 -> 65535)
+                        val = 180*((65535 - val) / (65535))-90;
 
-                                //send angle to arduino
-                                return "F" + Math.Round(val, 2).ToString();
-                            }
-                        default:
-                        {
-                            return null;//don't send anything
-                        }
+                        //send angle to arduino
+                        break;
                     }
-
-                    Console.WriteLine(state);
                 }
             }
+            //return "";
+            return "F" + Math.Round(val, 2).ToString() +"\n";
         }
     }
 }

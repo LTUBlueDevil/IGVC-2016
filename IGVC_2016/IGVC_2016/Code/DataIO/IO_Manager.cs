@@ -51,17 +51,16 @@ namespace IGVC_2016.Code.DataIO
             //Create Thread to get data
             ThreadStart thr = new ThreadStart(this.Process);
             oThread = new Thread(thr);
-
+            
             try 
             { 
-                Arduino.BaudRate = 9600;
-                Arduino.PortName="COM4";
+                Arduino = new SerialPort("COM5", 9600);
                 Arduino.Open();
             }
             catch { }
 
             //send function to lidar constructor to assign function to delegate
-            l = new Lidar("COM5", 115200, this.DisplayLidarData); 
+            l = new Lidar("COM6", 115200, this.DisplayLidarData); 
 
             if(l.isOpen())
             {
@@ -93,7 +92,8 @@ namespace IGVC_2016.Code.DataIO
                 parent.SetRight_Display(Right.img);
                 parent.SetLeft_Display(Left.img);
 
-                Arduino.Write(controller.Task());
+                if(Arduino.IsOpen)
+                    Arduino.Write(controller.Task());
 
                 //need to setup delegate for gps
                 //parent.setGPSData(gpsUnit.NEMA);
