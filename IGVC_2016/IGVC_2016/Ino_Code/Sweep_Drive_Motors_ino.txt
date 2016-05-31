@@ -1,0 +1,52 @@
+﻿/* Sweep
+ by BARRAGAN <http://barraganstudio.com>
+ This example code is in the public domain.
+
+ modified 8 Nov 2013
+ by Scott Fitzgerald
+ http://www.arduino.cc/en/Tutorial/Sweep
+*/
+#define PinNum1 3
+#define PinNum2 5
+#define PinNum3 6
+#define PinNum4 9
+
+#include <Servo.h>
+
+Servo FLdrive;  //front left
+Servo FRdrive;  //front right
+Servo RLdrive;  //rear left
+Servo RRdrive;  //rear right
+
+// twelve servo objects can be created on most boards
+
+int pos = 0;    // variable to store the servo position
+
+void setup() 
+{
+  FLdrive.attach(PinNum1);  // attaches the servo on pin 9 to the servo object
+  FRdrive.attach(PinNum2);
+  RLdrive.attach(PinNum3);
+  RRdrive.attach(PinNum4);
+}
+
+void loop() 
+{
+  for (pos = 0; pos <= 180; pos += 1) 
+  { // goes from 0 degrees to 180 degrees
+    // in steps of 1 degree
+    FLdrive.write(pos);              // tell servo to go to position in variable 'pos'
+    FRdrive.write(pos);
+    RLdrive.write(pos);
+    RRdrive.write(pos);
+    delay(50);                       // waits 50ms for the servo to reach the position
+  }
+  for (pos = 180; pos >= 0; pos -= 1) 
+  { // goes from 180 degrees to 0 degrees
+    FLdrive.write(pos);              // tell servo to go to position in variable 'pos'
+    FRdrive.write(pos);
+    RLdrive.write(pos);
+    RRdrive.write(pos);
+    delay(50);                       // waits 50ms for the servo to reach the position
+  }
+}

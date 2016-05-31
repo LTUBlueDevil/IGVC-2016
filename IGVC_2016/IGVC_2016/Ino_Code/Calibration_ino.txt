@@ -1,0 +1,67 @@
+﻿#include<Servo.h>
+
+#define POT 0 //A0
+#define MOTOR 6
+#define ENC_A 3
+#define ENC_B 2
+#define PulsePerRev 7
+#define GearRatio 188 //188:1
+
+double val;
+long pwm;
+double counter;
+int gain = 2;
+int angle;
+Servo Motor;
+
+void isr()//ENC_A interrupt rising edge
+{
+  if (digitalRead(ENC_B) == 1)
+    counter++;
+  else
+    counter--;
+}
+
+void setup()
+{
+  pinMode(POT, OUTPUT);
+  pinMode(ENC_A, INPUT);
+  pinMode(ENC_B, INPUT);
+
+  val = 0;
+  counter = 658; //658 = 180 degrees
+
+  Serial.begin(9600);
+  Serial.println("Serial port as been started");
+
+  Motor.attach(MOTOR);
+
+  digitalWrite(ENC_A,HIGH);
+  digitalWrite(ENC_B,HIGH);
+  attachInterrupt(digitalPinToInterrupt(ENC_A),isr,RISING);
+}
+
+void loop()
+{
+  //0 - > 1023
+  val = analogRead(POT);
+
+  //Convert to percentage
+  val = 360 * (1023 - val) / (1023);  
+
+  angle = 360 * (counter / (PulsePerRev * GearRatio));
+
+  //when set pointis reached, pwm should be 90 indiating no motion
+  pwm = 90 + gain * (val - angle);
+
+  if (pwm <= 0)
+    pwm = 0;
+  else if (pwm >= 180)
+    pwm = 180;
+
+  Motor.write(pwm);
+
+  Serial.println(counter);
+}
+
+

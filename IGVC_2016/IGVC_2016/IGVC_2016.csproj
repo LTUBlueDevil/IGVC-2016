@@ -125,7 +125,12 @@
     <Content Include="cvextern.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Manual_Control_ino.txt" />
+    <Content Include="Ino_Code\Calibration_Both_ino.txt" />
+    <Content Include="Ino_Code\Calibration_ino.txt" />
+    <Content Include="Ino_Code\IMU_data_ino.txt" />
+    <Content Include="Ino_Code\Manual_Control_ino.txt" />
+    <Content Include="Ino_Code\Sweep_Drive_Motors_ino.txt" />
+    <Content Include="Ino_Code\Sweep_Steering_Motors_ino.txt" />
     <Content Include="nppc64_55.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
