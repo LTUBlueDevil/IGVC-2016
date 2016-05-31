@@ -92,9 +92,12 @@ namespace IGVC_2016.Code.DataIO
                 parent.SetRight_Display(Right.img);
                 parent.SetLeft_Display(Left.img);
 
-                if(Arduino.IsOpen)
-                    Arduino.Write(controller.Task());
+                //get controller data
+                string command = controller.Task();
 
+                if(Arduino.IsOpen)
+                    Arduino.Write(command);
+                Thread.Sleep(100);
                 //need to setup delegate for gps
                 //parent.setGPSData(gpsUnit.NEMA);
             }

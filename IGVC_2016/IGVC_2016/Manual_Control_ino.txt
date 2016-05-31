@@ -1,0 +1,171 @@
+﻿#include<Servo.h>
+
+#define Right_POT 0 //A0
+#define Right_MOTOR 7
+#define Right_ENC_A 3 //need this pin for interrupt
+#define Right_ENC_B 9
+
+#define Left_POT 1 //A1
+#define Left_MOTOR 5
+#define Left_ENC_A 2 //need this pin for interrupt
+#define Left_ENC_B 8 
+
+#define PulsePerRev 7
+#define GearRatio 188 //188:1
+
+double Right_Val;
+double Left_Val;
+double inVal = 0;
+double inLeft_Val = 0;
+long Right_pwm;
+long Left_pwm;
+double Right_counter;
+double Left_counter;
+int gain = 1;
+int Right_angle;
+int Left_angle;
+String serialIn = "";
+bool stringComp = false;
+Servo Right_Motor;
+Servo Left_Motor;
+
+void Right_isr()//Right_ENC_A interrupt rising edge
+{
+  if (digitalRead(Right_ENC_B) == 1)
+    Right_counter++;
+  else
+    Right_counter--;
+}
+
+void Left_isr()//Left_ENC_A interrupt rising edge
+{
+  if (digitalRead(Left_ENC_B) == 1)
+    Left_counter++;
+  else
+    Left_counter--;
+}
+
+void setup()
+{
+  pinMode(Right_POT, OUTPUT);
+  pinMode(Right_ENC_A, INPUT);
+  pinMode(Right_ENC_B, INPUT);
+
+  pinMode(Left_POT, OUTPUT);
+  pinMode(Left_ENC_A, INPUT);
+  pinMode(Left_ENC_B, INPUT);
+
+  Right_Val = 0;
+  Right_counter = 658; //658 = 180 degrees
+
+  Left_Val = 0;
+  Left_counter = 658; //658 = 180 degrees
+
+  Serial.begin(9600);
+  //Serial.println("Serial port as been started");
+  //serialIn.reserve(200); //reserve x (200) bits for string
+
+  Right_Motor.attach(Right_MOTOR);
+  Left_Motor.attach(Left_MOTOR);
+
+  digitalWrite(Right_ENC_A,HIGH);
+  digitalWrite(Right_ENC_B,HIGH);
+  attachInterrupt(digitalPinToInterrupt(Right_ENC_A),Right_isr,RISING);
+
+  digitalWrite(Left_ENC_A,HIGH);
+  digitalWrite(Left_ENC_B,HIGH);
+  attachInterrupt(digitalPinToInterrupt(Left_ENC_A),Left_isr,RISING);
+}
+
+void loop()
+{
+   if (stringComp) {    
+    //Serial.println(serialIn[0]); // print input to serial port
+    char indChar = serialIn[0];
+    serialIn.remove(0,1);
+    
+    if(indChar == 'F')  //desired front wheel angles
+    {
+      inVal = (double)serialIn.toFloat();
+      //Serial.println(serialIn);
+    }
+    
+    // clear the string:
+    serialIn = "";
+    stringComp = false;
+    Serial.flush();
+  }
+  
+  //Calulate 1 time
+  if(inVal != 0){
+    Right_Val = inVal;
+    Left_Val = inVal;
+    
+    //Convert to  desired angle (setpoint)     
+    //Right_Val = 360 * (-90 - Right_Val) / (-90-90);
+    //Left_Val = 360 * (-90 - Left_Val) / (-90-90); 
+    inVal = 0;
+  }
+  //Serial.println(Right_Val);
+
+  
+
+  //Convert to output angle
+  Right_angle = 360 * (Right_counter / (PulsePerRev * GearRatio));
+  Left_angle = 360 * (Left_counter / (PulsePerRev * GearRatio));
+
+  //when set pointis reached, pwm should be 90 indiating no motion
+  Right_pwm = 90 + gain * (Right_Val - Right_angle);
+  Left_pwm = 90 + gain * (Left_Val - Left_angle);
+
+  //Create saturation Function
+  if (Right_pwm <= 0)
+    Right_pwm = 0;
+  else if (Right_pwm >= 180)
+    Right_pwm = 180;
+
+  if (Left_pwm <= 0)
+    Left_pwm = 0;
+  else if (Left_pwm >= 180)
+    Left_pwm = 180;
+
+  //Output to motors
+  Right_Motor.write(Right_pwm);
+  //Left_Motor.write(Left_pwm);
+
+}
+
+/*
+  Formatting
+  *********************
+  
+  first character is indicator (S,F,R)
+    S = SPEED
+    F = FRONT ANGLE
+    R = REAR ANGLE
+
+   second byte is value (type double)
+
+   EXAMPLE: 
+
+   "S20" --> SPEED is 20
+   
+ */
+
+void serialEvent() {
+
+  while (Serial.available()) {
+    // get the new byte:
+    char inChar = (char)Serial.read();
+    // add it to the inputString:
+    serialIn += inChar;
+    // if the incoming character is a newline, set a flag
+    // so the main loop can do something about it:
+    if (inChar == '\n') {
+      stringComp = true;
+    }
+    //Serial.write(serialIn[0]);
+  }
+}
+
+

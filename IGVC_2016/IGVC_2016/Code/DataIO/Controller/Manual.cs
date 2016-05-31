@@ -35,8 +35,7 @@ namespace IGVC_2016.Code.DataIO.Controller
             // If Joystick not found, throws an error
             if (joystickGuid == Guid.Empty)
             {
-                Console.WriteLine("No joystick/Gamepad found.");
-                Console.ReadKey();
+                //fix running code without controller
                 Environment.Exit(1);
             }
 

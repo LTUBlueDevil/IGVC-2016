@@ -125,6 +125,7 @@
     <Content Include="cvextern.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Manual_Control_ino.txt" />
     <Content Include="nppc64_55.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
