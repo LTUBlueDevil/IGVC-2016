@@ -36,6 +36,8 @@ namespace IGVC_2016.Code.DataIO
 
         Manual controller;
 
+        bool serialPortReady = true;
+
         //UDP_Host networkHost;
 
         public IO_Manager(MainWindow form)
@@ -55,6 +57,7 @@ namespace IGVC_2016.Code.DataIO
             try 
             { 
                 Arduino = new SerialPort("COM5", 9600);
+                Arduino.DataReceived += Arduino_DataReceived;
                 Arduino.Open();
             }
             catch { }
@@ -79,6 +82,13 @@ namespace IGVC_2016.Code.DataIO
             oThread.Start();
         }
 
+        void Arduino_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            char temp = (char)Arduino.ReadByte();
+            if(temp == 'R')
+                serialPortReady = true;
+        }
+
         public void lidarSerial()
         {
             //turn on Lidar
@@ -95,9 +105,12 @@ namespace IGVC_2016.Code.DataIO
                 //get controller data
                 string command = controller.Task();
 
-                if(Arduino.IsOpen)
+                if (command != "" && serialPortReady == true)
+                {
                     Arduino.Write(command);
-                Thread.Sleep(100);
+                    serialPortReady = false;
+                }
+                //Thread.Sleep(100);
                 //need to setup delegate for gps
                 //parent.setGPSData(gpsUnit.NEMA);
             }

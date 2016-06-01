@@ -66,7 +66,6 @@ namespace IGVC_2016.Code.DataIO.Controller
             var datas = joystick.GetBufferedData();
             foreach (var state in datas)
             {
-                var str = state.ToString().Replace(',',' ').Split(' ');
                 //str[0] = "Offset:"
                 //str[1] = Button Name
                 //str[2] = Blank
@@ -84,15 +83,23 @@ namespace IGVC_2016.Code.DataIO.Controller
                         val = state.Value;
                             
                         //convert value to angle (-90 -> 90) to (0 -> 65535)
-                        val = 180*((65535 - val) / (65535))-90;
+                        val = .0027*val+90;
 
                         //send angle to arduino
-                        break;
+                        return "F" + Math.Round(val, 2).ToString() + "\n";
                     }
                 }
             }
-            //return "";
-            return "F" + Math.Round(val, 2).ToString() +"\n";
+            return "";
+            //return "F" + Math.Round(val, 2).ToString() +"\n";
+        }
+
+        public bool IsAvailable()
+        {
+            if (joystick.GetBufferedData() != null)
+                return true;
+            else
+                return false;
         }
     }
 }
