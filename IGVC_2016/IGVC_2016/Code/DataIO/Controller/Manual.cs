@@ -11,7 +11,8 @@ namespace IGVC_2016.Code.DataIO.Controller
 {
     class Manual
     {
-        Joystick joystick; 
+        Joystick joystick;
+        public bool ControllerOn = false;
 
         public Manual()
         {
@@ -33,27 +34,29 @@ namespace IGVC_2016.Code.DataIO.Controller
                     joystickGuid = deviceInstance.InstanceGuid;
 
             // If Joystick not found, throws an error
-            if (joystickGuid == Guid.Empty)
+            if (joystickGuid != Guid.Empty)
             {
                 //fix running code without controller
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            
+
+                // Instantiate the joystick
+                joystick = new Joystick(directInput, joystickGuid);
+
+                Console.WriteLine("Found Joystick/Gamepad with GUID: {0}", joystickGuid);
+
+                // Query all suported ForceFeedback effects
+                var allEffects = joystick.GetEffects();
+                foreach (var effectInfo in allEffects)
+                    Console.WriteLine("Effect available {0}", effectInfo.Name);
+
+                // Set BufferSize in order to use buffered data.
+                joystick.Properties.BufferSize = 128;
+
+                // Acquire the joystick
+                joystick.Acquire();
+                ControllerOn = true;
             }
-
-            // Instantiate the joystick
-            joystick = new Joystick(directInput, joystickGuid);
-
-            Console.WriteLine("Found Joystick/Gamepad with GUID: {0}", joystickGuid);
-
-            // Query all suported ForceFeedback effects
-            var allEffects = joystick.GetEffects();
-            foreach (var effectInfo in allEffects)
-                Console.WriteLine("Effect available {0}", effectInfo.Name);
-
-            // Set BufferSize in order to use buffered data.
-            joystick.Properties.BufferSize = 128;
-
-            // Acquire the joystick
-            joystick.Acquire();
         }
 
         double val = 0;

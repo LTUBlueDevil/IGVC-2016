@@ -103,12 +103,15 @@ namespace IGVC_2016.Code.DataIO
                 parent.SetLeft_Display(Left.img);
 
                 //get controller data
-                string command = controller.Task();
-
-                if (command != "" && serialPortReady == true)
+                if (controller.ControllerOn)
                 {
-                    Arduino.Write(command);
-                    serialPortReady = false;
+                    string command = controller.Task();
+
+                    if (command != "" && serialPortReady == true)
+                    {
+                        Arduino.Write(command);
+                        serialPortReady = false;
+                    }
                 }
                 //Thread.Sleep(100);
                 //need to setup delegate for gps
