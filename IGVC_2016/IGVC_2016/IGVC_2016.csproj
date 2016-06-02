@@ -65,6 +65,14 @@
     <Compile Include="Code\DataIO\SaveFile.cs" />
     <Compile Include="Code\DataIO\SCIP_library.cs" />
     <Compile Include="Code\GPS_Data\GPS.cs" />
+    <Compile Include="Code\IMU\Accelerometer.cs" />
+    <Compile Include="Code\IMU\Filter.cs" />
+    <Compile Include="Code\IMU\GPS.cs" />
+    <Compile Include="Code\IMU\Gyroscope.cs" />
+    <Compile Include="Code\IMU\IMU.cs" />
+    <Compile Include="Code\IMU\Kalman.cs" />
+    <Compile Include="Code\IMU\KalmanMat.cs" />
+    <Compile Include="Code\IMU\Magnometer.cs" />
     <Compile Include="Code\Lidar_Data\Lidar.cs" />
     <Compile Include="Code\Lidar_Data\LIDAR_Visualizer_Form.cs">
       <SubType>Form</SubType>

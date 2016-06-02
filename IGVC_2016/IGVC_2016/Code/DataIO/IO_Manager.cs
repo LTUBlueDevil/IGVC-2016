@@ -14,6 +14,7 @@ using System.Drawing;
 using IGVC_2016.Code.GPS_Data;
 using IGVC_2016.Code.DataIO.Controller;
 using System.IO.Ports;
+using Kalman_Filter;
 
 namespace IGVC_2016.Code.DataIO
 {
@@ -24,7 +25,7 @@ namespace IGVC_2016.Code.DataIO
 
         // Create lidar object
         Lidar l;
-        GPS gpsUnit;
+        IMU IMU_Data;
 
         //Create Camera Objects
         Camera Right = new Camera(0);
@@ -84,9 +85,13 @@ namespace IGVC_2016.Code.DataIO
 
         void Arduino_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            char temp = (char)Arduino.ReadByte();
-            if(temp == 'R')
+            string temp = Arduino.ReadLine();
+            if(temp == "R")
                 serialPortReady = true;
+            else
+            {
+                IMU_Data.Parse(temp);
+            }
         }
 
         public void lidarSerial()
@@ -99,6 +104,7 @@ namespace IGVC_2016.Code.DataIO
         {
             while (oThread.IsAlive)
             {
+                //set Camera Images
                 parent.SetRight_Display(Right.img);
                 parent.SetLeft_Display(Left.img);
 
@@ -113,9 +119,19 @@ namespace IGVC_2016.Code.DataIO
                         serialPortReady = false;
                     }
                 }
-                //Thread.Sleep(100);
-                //need to setup delegate for gps
-                //parent.setGPSData(gpsUnit.NEMA);
+
+                parent.Ax = IMU_Data.Accel()[0].ToString();//X data
+                parent.Ay = IMU_Data.Accel()[1].ToString();//Y data
+                parent.Az = IMU_Data.Accel()[2].ToString();//Z data
+
+                parent.Gx = IMU_Data.Gyro()[0].ToString();//X data
+                parent.Gy = IMU_Data.Gyro()[1].ToString();//Y data
+                parent.Gz = IMU_Data.Gyro()[2].ToString();//Z data
+
+                parent.Heading = IMU_Data.Heading().ToString();//Heading Info
+
+                //need to setup delegate for gps and IMU data
+                //parent.setIMUData(gpsUnit.NEMA);
             }
            
         }

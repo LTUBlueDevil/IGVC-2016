@@ -23,6 +23,10 @@ namespace IGVC_2016
     public partial class MainWindow : Form
     {
         IO_Manager data;
+
+        //global variables to set labels
+        public string Ax, Ay, Az, Gx, Gy, Gz, Heading;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -175,6 +179,19 @@ namespace IGVC_2016
             {
                 LidarSerialButton.Text = "Open";
             }
+        }
+
+        private void UpdateUI_Tick(object sender, EventArgs e)
+        {
+            AxLabel.Text = Ax;
+            AyLabel.Text = Ay;
+            AzLabel.Text = Az;
+
+            GxLabel.Text = Ax;
+            GyLabel.Text = Ay;
+            GzLabel.Text = Az;
+
+            HeadingLabel.Text = Ax;
         }
     }
 }
